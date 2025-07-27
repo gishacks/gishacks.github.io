@@ -1,5 +1,6 @@
 ---
 title: جلسه ۱ - مبانی
+level: secret
 ---
 
 ## راه‌اندازی محیط کار
@@ -116,37 +117,32 @@ f. برای اطمینان از درستی انجام مراحل قبل اولی
         print('Number of '+c+': '+ str(count))
     countChr('d', name)
     ```
-### کار با چهار عمل اصلی در ArcGIS Pro
 
-    ۱. دانلود جدول نقاط درختان تصادفی در تهران از [این لینک](https://alitayebi.pythonanywhere.com/randomtrees) و افزودن آن در ArcGIS Pro
+### کار با فایل
+۱. تعداد فراوانی یک کلمه در یک فایل نوشتاری
 
-    ۲. تبدیل لایه جدولی به نطقه با کلیک راست روی لایه و انتخاب گزینه 
-        <figure markdown>
-        ![](../../assets/pygis101-4.png)
-        <figcaption></figcaption>
-        </figure>
+    ```python
+    fhand =open('hamlet.txt')
+    hamlet = fhand.read()
+    text = hamlet.split()
 
-    ۳. افزودن فیلد جدید به نام ارتفاع به جدول و محاسبه آن بر اساس گونه درخت
+    count = 0
+    for word in text:
+        word = word.lower()
+        if word == 'hamlet':
+            count += 1
+    print(count)
+    ```
 
-        Height = 
-        ```python
-        calcHeight(!spiecies!)
-        ```
+۲. ایجاد ابر کلمات
 
-        Code Block
-
-        ```python
-        import random
-        def calcHeight(s):
-            h = 0 
-            if s == 'kaaj':
-                h = random.randint(20,60)
-            elif s == 'sarv':
-                h = random.randint(5,20)
-            else:
-                h = random.randint(2,8)
-            return h
-        ```
-
-
-
+    ```python
+    words = {}
+    for word in text:
+        word = word.lower()
+        if word in words:
+            words[word]+=1
+        else:
+            words[word] = 1
+    print(words)
+    ```
