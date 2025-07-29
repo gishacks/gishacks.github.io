@@ -137,6 +137,7 @@ a.dl-shp:link, a.dl-shp:visited {
   }
   
   code {
-    direction: ltr;
+    direction: ltr !important;
   text-align: left;
+  display: inline-block;
   }
