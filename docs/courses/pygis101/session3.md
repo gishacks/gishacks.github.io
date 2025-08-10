@@ -1,6 +1,5 @@
 ---
 title: جلسه ۳ - رستر
-level: secret
 ---
 ## کار با Rasterio
 ### ۱. نصب
