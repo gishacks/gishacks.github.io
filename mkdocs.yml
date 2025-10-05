@@ -139,13 +139,13 @@ nav:
     - GIS پیشرفته:
       - معرفی دوره: courses/advgis.md
       - جلسه ۱ - معرفی و برنامه‌ریزی: courses/advgis/session1.md
-      - جلسه ۲ - تحلیل سطح فضایی: courses/advgis/session2.md
-      - جلسه ۳ - تحلیل مطلوبیت فضایی: courses/advgis/session3.md
+      - جلسه ۳ - تحلیل فضایی: courses/advgis/session3.md
+      - جلسه ۲ - تحلیل سطح: courses/advgis/session2.md
       - جلسه ۴ - تحلیل هیدرولوژیک: courses/advgis/session4.md
       - جلسه ۵ - ایجاد داده شبکه‌ای: courses/advgis/session5.md
       - جلسه ۶ - تحلیل دسترسی شبکه: courses/advgis/session6.md
       - جلسه ۷ - مسیریابی و مبدا-مقصد: courses/advgis/session7.md
-      - جلسه ۸ - تحلیل کسب‌وکار شبکه: courses/advgis/session8.md
+      - جلسه ۸ - تحلیل کسب‌وکار: courses/advgis/session8.md
       - جلسه ۹ - آمار فضایی پایه: courses/advgis/session9.md
       - جلسه ۱۰ - رگرسیون فضایی: courses/advgis/session10.md
       - جلسه ۱۱ - تحلیل الگوی آماری: courses/advgis/session11.md
