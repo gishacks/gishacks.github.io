@@ -141,19 +141,19 @@ nav:
       - جلسه ۱ - معرفی و برنامه‌ریزی: courses/advgis/session1.md
       - جلسه ۲ - تحلیل سطح فضایی: courses/advgis/session2.md
       - جلسه ۳ - تحلیل مطلوبیت فضایی: courses/advgis/session3.md
-      - جلسه ۴ - تحلیل هیدرولوژیک فضایی: courses/advgis/session4.md
+      - جلسه ۴ - تحلیل هیدرولوژیک: courses/advgis/session4.md
       - جلسه ۵ - ایجاد داده شبکه‌ای: courses/advgis/session5.md
       - جلسه ۶ - تحلیل دسترسی شبکه: courses/advgis/session6.md
-      - جلسه ۷ - مسیریابی و مبدا-مقصد شبکه: courses/advgis/session7.md
+      - جلسه ۷ - مسیریابی و مبدا-مقصد: courses/advgis/session7.md
       - جلسه ۸ - تحلیل کسب‌وکار شبکه: courses/advgis/session8.md
       - جلسه ۹ - آمار فضایی پایه: courses/advgis/session9.md
       - جلسه ۱۰ - رگرسیون فضایی و مدل‌سازی: courses/advgis/session10.md
       - جلسه ۱۱ - تحلیل الگوی آماری-فضایی: courses/advgis/session11.md
       - جلسه ۱۲ - مقدمه WebGIS و معماری: courses/advgis/session12.md
       - جلسه ۱۳ - مبانی طراحی وب: courses/advgis/session13.md
-      - جلسه ۱۴ - نقشه تعاملی Leaflet بخش ۱: courses/advgis/session14.md
-      - جلسه ۱۵ - نقشه تعاملی Leaflet بخش ۲: courses/advgis/session15.md
-      - جلسه ۱۶ - توسعه WebGIS متن‌باز: courses/advgis/session16.md
+      - جلسه ۱۴ - Leaflet بخش ۱: courses/advgis/session14.md
+      - جلسه ۱۵ - Leaflet بخش ۲: courses/advgis/session15.md
+      - جلسه ۱۶ - توسعه WebGIS: courses/advgis/session16.md
     - ورود به دنیای برنامه‌نویسی پایتون در GIS: 
       - معرفی دوره: courses/pygis101.md
       - جلسه ۱-مبانی: courses/pygis101/session1.md
