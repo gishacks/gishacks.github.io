@@ -1,7 +1,7 @@
 site_name: ترفندهای GIS
 repo_name: gishacks/main
-repo_url: https://github.com/gishacks/main
-edit_uri: ""
+repo_url: https://github.com/gishacks/gishacks.github.io
+edit_uri: edit/main/docs/
 copyright: Copyright &copy; 2023 GIS Hacks
 plugins:
   - blog:
