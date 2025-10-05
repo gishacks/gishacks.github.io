@@ -112,6 +112,30 @@ nav:
   - دوره‌های آموزشی:
     - دوره‌های آموزشی: courses/index.md
     - کار با داده‌های جهانی: courses/global-data.md
+    - آشنایی با GIS:
+      - معرفی دوره: courses/gis101.md
+      - جلسه ۱-مفاهیم GIS: courses/gis101/session1.md
+      - جلسه ۲-آشنایی با داده‌ها و نرم‌افزار: courses/gis101/session2.md
+      - جلسه ۳-نمایش داده‌ها ۱: courses/gis101/session3.md
+      - جلسه ۴-نمایش داده‌ها ۲: courses/gis101/session4.md
+      - جلسه ۵-قاب‌بندی ساده: courses/gis101/session5.md
+      - جلسه ۶-قاب‌بندی حرفه‌ای: courses/gis101/session6.md
+      - جلسه ۷-گزارش آماری جداول: courses/gis101/session7.md
+      - جلسه ۸-گزارش آماری حرفه‌ای: courses/gis101/session8.md
+      - جلسه ۹-انتخاب توصیفی: courses/gis101/session9.md
+      - جلسه ۱۰-انتخاب ترسیمی: courses/gis101/session10.md
+      - جلسه ۱۱-تحلیل موقعیت لایه‌ها: courses/gis101/session11.md
+      - جلسه ۱۲-تحلیل نزدیکی: courses/gis101/session12.md
+      - جلسه ۱۳-تحلیل مطلوبیت: courses/gis101/session13.md
+      - جلسه ۱۴-تحلیل فضایی ۱: courses/gis101/session14.md
+      - جلسه ۱۵-تحلیل فضایی ۲: courses/gis101/session15.md
+      - جلسه ۱۶-تحلیل سطح: courses/gis101/session16.md
+      - جلسه ۱۷-تحلیل شبکه: courses/gis101/session17.md
+      - جلسه ۱۸-امتیازدهی و وزن‌دهی: courses/gis101/session18.md
+      - جلسه ۱۹-ساخت لایه GIS: courses/gis101/session19.md
+      - جلسه ۲۰-جمع‌آوری مستقیم داده: courses/gis101/session20.md
+      - جلسه ۲۱-ساخت نقشه آنلاین: courses/gis101/session21.md
+      - جلسه ۲۲-ساعت روایت داده‌ها: courses/gis101/session22.md
     - ورود به دنیای برنامه‌نویسی پایتون در GIS: 
       - معرفی دوره: courses/pygis101.md
       - جلسه ۱-مبانی: courses/pygis101/session1.md
