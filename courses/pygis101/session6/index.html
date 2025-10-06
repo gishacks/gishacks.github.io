@@ -1,0 +1,2780 @@
+<!DOCTYPE html><html lang="fa" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>جلسه ۱ - مبانی - ترفندهای GIS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Vazirmatn";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href="../../.." title="ترفندهای GIS" class="md-header__button md-logo" aria-label="ترفندهای GIS" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ترفندهای GIS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              جلسه ۱ - مبانی
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gishacks/gishacks.github.io" title="رفتن به مخزن" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    gishacks/main
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  صفحه نخست
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../hacks/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ترفندها
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  دوره‌های آموزشی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  درباره
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../contact/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  تماس
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  بایگانی
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ترفندهای GIS" class="md-nav__button md-logo" aria-label="ترفندهای GIS" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    ترفندهای GIS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gishacks/gishacks.github.io" title="رفتن به مخزن" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    gishacks/main
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    صفحه نخست
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../hacks/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    ترفندها
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            ترفندها
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/basemaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    افزودن نقشه پایه
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/heatmaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    نقشه حرارتی زمان‌مند
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/watershed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    تحلیل حوزه آب‌خیز
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/landcover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    نقشه پوشش زمین
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    دوره‌های آموزشی
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            دوره‌های آموزشی
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../global-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    کار با داده‌های جهانی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    آشنایی با GIS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            آشنایی با GIS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    معرفی دوره
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱-مفاهیم GIS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۲-آشنایی با داده‌ها و نرم‌افزار
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۳-نمایش داده‌ها ۱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۴-نمایش داده‌ها ۲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۵-قاب‌بندی ساده
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۶-قاب‌بندی حرفه‌ای
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۷-گزارش آماری جداول
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۸-گزارش آماری حرفه‌ای
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۹-انتخاب توصیفی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۰-انتخاب ترسیمی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۱-تحلیل موقعیت لایه‌ها
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۲-تحلیل نزدیکی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۳-تحلیل مطلوبیت
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۴-تحلیل فضایی ۱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۵-تحلیل فضایی ۲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۶-تحلیل سطح
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۷-تحلیل شبکه
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۸-امتیازدهی و وزن‌دهی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۹-ساخت لایه GIS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۲۰-جمع‌آوری مستقیم داده
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۲۱-ساخت نقشه آنلاین
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۲۲-ساعت روایت داده‌ها
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    GIS پیشرفته
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            GIS پیشرفته
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    معرفی دوره
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱ - معرفی و برنامه‌ریزی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۳ - تحلیل فضایی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۲ - تحلیل سطح
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۴ - تحلیل هیدرولوژیک
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۵ - ایجاد داده شبکه‌ای
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۶ - تحلیل دسترسی شبکه
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۷ - مسیریابی و مبدا-مقصد
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۸ - تحلیل کسب‌وکار
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۹ - آمار فضایی پایه
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۰ - رگرسیون فضایی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۱ - تحلیل الگوی آماری
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۲ - مقدمه WebGIS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۳ - مبانی طراحی وب
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۴ - Leaflet بخش ۱
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۵ - Leaflet بخش ۲
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۶ - توسعه WebGIS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ورود به دنیای برنامه‌نویسی پایتون در GIS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            ورود به دنیای برنامه‌نویسی پایتون در GIS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    معرفی دوره
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱-مبانی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۲-وکتور
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۳-رستر
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۴-آمار
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۵-وب
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6">
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    تحلیل داده‌های شهری
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            تحلیل داده‌های شهری
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    معرفی دوره
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱ - آشنایی داده‌های شهری
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۲ - پاکسازی داده‌ها
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۳ - تحلیل جمعیت و تجمیع
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۴ - داده‌های حرکتی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۵ - تحلیل شبکه و دسترسی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۶ - مصورسازی حرکت
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۷ - داده‌های سنجش از دور
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۸ - پایش محیط زیست
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۹ - تشخیص تغییرات و گسترش
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۰ - بازار مسکن و شاخص‌ها
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۱ - داده‌های جرم و خدمات
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۲ - تحلیل سیاست و اخلاق
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۳ - داده‌های متنی و شبکه اجتماعی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۴ - مدل‌سازی و شبیه‌سازی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataanalytics/session15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    جلسه ۱۵ - مصورسازی پیشرفته
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    درباره
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    تماس
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    بایگانی
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      راه‌اندازی محیط کار
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="راه‌اندازی محیط کار">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ۱. نصب پایتون:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ۲. ساخت محیط مجازی
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      ۳. نصب vscode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    <span class="md-ellipsis">
+      ۴. راه‌اندازی GitHub
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      ۵. نصب Jupyter Lab
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      شروع برنام‌نویسی
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="شروع برنام‌نویسی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      چهار عمل اصلی
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      کار با فایل
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/gishacks/gishacks.github.io/edit/main/docs/courses/pygis101/session6.md" title="این صفحه را ویرایش کنید" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/gishacks/gishacks.github.io/raw/main/docs/courses/pygis101/session6.md" title="محتویات این صفحه را نشان بده" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<div id="mkdocs-encrypted-content" style="display:none">8Q3hjArKu67qlBgvRNShww==;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</div>
+<div id="mkdocs-decrypted-content" style="display:none">
+    <form id="mkdocs-decrypt-form" class="md-content__inner md-typeset">
+        <h1>این صفحه شامل مجموعه یادداشت‌های جلسات دوره است و برای شرکت‌کنندگان دوره قابل دسترس است</h1>
+        <p>نیاز به تأیید مجدد.</p>
+        <input class="md-input" type="text" id="mkdocs-content-user" placeholder="نام کاربری">
+        <input class="md-input" type="password" id="mkdocs-content-password" placeholder="پسورد">
+        <button class="md-button md-button--primary" id="mkdocs-decrypt-button">ورود</button>
+        <p id="mkdocs-decrypt-msg"></p>
+    </form>
+</div>
+
+<script type="text/javascript">
+var encryptcontent_id = "encryptcontent_1";
+var encryptcontent_path = "courses/pygis101/session6/";
+var decryption_failure_message = "\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc \u06cc\u0627 \u067e\u0633\u0648\u0631\u062f \u0627\u0634\u062a\u0628\u0627\u0647 \u0627\u0633\u062a..";
+var encryptcontent_keystore = ["Ke6395OlIF9/V1XplUhWDQ==;WjGjnrKHLk3UUAqtc9mDGYUXL/kCDC38K2lir14DZfllN940AHvzaqRv0QeP+Ii44UgoPef2iTuSguRrIJDZnH25bcqRgnTrYrTANEMbP9YUvb0B2MznuYzYCpCjDj+i;MPqWcWuJ8LF43X9F4dEvcw==;YYD+eQW0LgV8P8eu5HhyTnYWZ97RbbMOczVOatjF524="];
+var encryptcontent_obfuscate = 0;
+
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/core.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/enc-base64.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/cipher-core.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/sha256.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/hmac.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/pbkdf2.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/aes.js"></script>
+<script type="text/javascript" src="../../../assets/javascripts/decrypt-contents.js" defer></script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 GIS Hacks
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/gishacks" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/gishacks" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.indexes", "announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
