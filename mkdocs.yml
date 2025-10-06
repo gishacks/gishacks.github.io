@@ -161,6 +161,23 @@ nav:
       - جلسه ۳-رستر: courses/pygis101/session3.md
       - جلسه ۴-آمار: courses/pygis101/session4.md
       - جلسه ۵-وب: courses/pygis101/session5.md
+    - تحلیل داده‌های شهری:
+      - معرفی دوره: courses/dataanalytics.md
+      - جلسه ۱ - آشنایی داده‌های شهری: courses/dataanalytics/session1.md
+      - جلسه ۲ - پاکسازی داده‌ها: courses/dataanalytics/session2.md
+      - جلسه ۳ - تحلیل جمعیت و تجمیع: courses/dataanalytics/session3.md
+      - جلسه ۴ - داده‌های حرکتی: courses/dataanalytics/session4.md
+      - جلسه ۵ - تحلیل شبکه و دسترسی: courses/dataanalytics/session5.md
+      - جلسه ۶ - مصورسازی حرکت: courses/dataanalytics/session6.md
+      - جلسه ۷ - داده‌های سنجش از دور: courses/dataanalytics/session7.md
+      - جلسه ۸ - پایش محیط زیست: courses/dataanalytics/session8.md
+      - جلسه ۹ - تشخیص تغییرات و گسترش: courses/dataanalytics/session9.md
+      - جلسه ۱۰ - بازار مسکن و شاخص‌ها: courses/dataanalytics/session10.md
+      - جلسه ۱۱ - داده‌های جرم و خدمات: courses/dataanalytics/session11.md
+      - جلسه ۱۲ - تحلیل سیاست و اخلاق: courses/dataanalytics/session12.md
+      - جلسه ۱۳ - داده‌های متنی و شبکه اجتماعی: courses/dataanalytics/session13.md
+      - جلسه ۱۴ - مدل‌سازی و شبیه‌سازی: courses/dataanalytics/session14.md
+      - جلسه ۱۵ - مصورسازی پیشرفته: courses/dataanalytics/session15.md
   - درباره: about.md
   - تماس: contact.md
 
