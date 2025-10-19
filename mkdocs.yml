@@ -7,6 +7,14 @@ plugins:
   - blog:
       blog_dir: . 
   - search
+  - git-committers:
+      repository: gishacks/gishacks.github.io   # <owner>/<repo>
+      branch: main                     # or your default branch
+      # Optional:
+      # exclude:
+      #   - README.md
+      # exclude_committers:
+      #   - web-flow
   - encryptcontent:
       title_prefix: '🔒'
       summary: 'این صفحه شامل مجموعه یادداشت‌های جلسات دوره است و برای شرکت‌کنندگان دوره قابل دسترس است'
