@@ -20,6 +20,10 @@ tags:
 ## ساختار و سرفصل‌ها
 
 ### بخش اول: داده‌های اداری و جمعیتی (هفته‌های ۱ تا ۳)
+
+[Sample Data](https://github.com/gishacks/UrbanAnalytics/raw/refs/heads/main/part1/data.zip){ .md-button }
+[2SFCA Notebook](https://github.com/gishacks/UrbanAnalytics/blob/main/part1/2sfca.ipynb){ .md-button }
+
 - هفته ۱: آشنایی با داده‌های شهری و مرزهای اداری، انواع داده‌های شهری، اهمیت داده‌های مکانی در برنامه‌ریزی شهری
 - هفته ۲: دریافت و پاک‌سازی داده‌های سرشماری با Python و R، کار با API داده‌های ایران و تهران
 - هفته ۳: تحلیل داده‌های جمعیتی و تجمیع مکانی، الحاق و تجمیع با Python و R
