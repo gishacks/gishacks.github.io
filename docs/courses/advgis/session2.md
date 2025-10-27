@@ -39,7 +39,7 @@ title: جلسه ۲ - تحلیل فضایی
 در ابتدا لازم است که ما داده‌های خود را جمع‌ آوری کنیم؛ یکی از مهم‌ترین داده‌هایی که به آن نیاز داریم داده‌ی نقاط بیمارستان‌های موجود
 است: برای اینکار ابتدا به سایت open street map  می‌رویم و محدوده تهران را انتخاب می‌کنیم در بخش exporte  به دلیل اینکه حجم داده‌های دانلودی زیاد است از یکی از درگاه‌هایی که در سمت چپ تصویر زیر می‌بینیم می‌توانیم استفاده کنیم:
 
-![توضیح تصویر](https://www.dropbox.com/scl/fi/lfkxmxvy9nahutwshki33/Screenshot-18.png?rlkey=hb6afop6p9sfekmnem7yx8qeg&st=3bbjln9y&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/lfkxmxvy9nahutwshki33/Screenshot-18.png?rlkey=hb6afop6p9sfekmnem7yx8qeg&st=3bbjln9y&dl=1)
 
 پس از دانلود شدن فایل مورد نظر، لایه نقاط آن را در QGIS اد می‌کنیم؛ از
 آنجایی که داده‌های زیادی به عنوان نقطه در نظر گرفته شده‌اند، حجم آنها زیاد است.
@@ -52,7 +52,7 @@ title: جلسه ۲ - تحلیل فضایی
 حال برای آنکه نقاط بیمارستان را پیدا کنیم باید به بخش toolbar کیو‌جی‌ای‌اس
 مراجعه کنیم و در بخش  select feature by value  در ردیف other tag، بنویسیم hospital  و منتظر شویم که نقاط بیمارستان برایمان انتخاب شوند: پس از انتخاب می‌توانیم آنها را در یک شیپ فایل جدا خروجی بگیریم.
 
-![توضیح تصویر](https://www.dropbox.com/scl/fi/bdhzrqgcfycwx1pye4ojp/2.png?rlkey=zo3oehq0sjhs6byzkuoeq0d2j&st=iai8pq93&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/bdhzrqgcfycwx1pye4ojp/2.png?rlkey=zo3oehq0sjhs6byzkuoeq0d2j&st=iai8pq93&dl=1)
 ## تحلیل همپوشانی وزنی
 
 از این تحلیل برای مکانیابی بیمارستان جدید بر اساس فاصله از بیمارستان‌های وضع موجود، مراکز مدیریت بحران و کاربری‌های صنعتی موجود استفاده‌شد. کاربری‌های صنعتی در میانه تحلیل به لایه‌ها اضافه‌شد.
@@ -240,9 +240,11 @@ https://www.dropbox.com/scl/fi/2qrjd3x6d1updb5tr8qhd/Screenshot-2025-10-17-12360
 
 نکته‌ای که در اینجا لازم است یادآور شوم این است که در
 تمامی تحلیل‌های سطح همواری داده لایه ورودی، لایه elevation  است.
-![توضیح تصویر](https://www.dropbox.com/scl/fi/sbbn35tud68f8n786akcb/8.png?rlkey=61im3i6zaj1bgv13t7ed1hjlb&st=jyvl08me&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/sbbn35tud68f8n786akcb/8.png?rlkey=61im3i6zaj1bgv13t7ed1hjlb&st=jyvl08me&dl=1)
+ 
  **نقشه جهت شیب تولید شده**
-![توضیح تصویر](https://www.dropbox.com/scl/fi/4qvo02muzenquztkjylml/9.png?rlkey=vz9r331kngxotc5b6r8xdphtv&st=onj6qnic&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/4qvo02muzenquztkjylml/9.png?rlkey=vz9r331kngxotc5b6r8xdphtv&st=onj6qnic&dl=1)
+
 **تحلیل** **Hill Shade**
 
 این تحلیل برای ما جنبه تحلیلی ندارد و بیشتر جنبه گرافیکی
@@ -254,9 +256,11 @@ https://www.dropbox.com/scl/fi/2qrjd3x6d1updb5tr8qhd/Screenshot-2025-10-17-12360
 آزیموف Azimuth به معنای موقعیت قرار‌گیری خورشید در آسمان است که به توجه به اینکه خورشید از شرق طلوع و غرب، غروب می‌کند، همواره بین ۹۰ تا 270 درجه است.
 
 ورتیکال انگل Vertical angle به معنای موقعیت خورشید نسبت به سال است که ما در کدام فصل قرار داریم، در تابستان نزدیک به ۹۰ درجه و در زمستان نزدیک صفر تا ۳۰ درجه است.
-![توضیح تصویر](https://www.dropbox.com/scl/fi/q3u9dhu1454r4igsh4t6c/10.png?rlkey=fmby751unl22rnjrkgysrl0q6&st=mza2418l&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/q3u9dhu1454r4igsh4t6c/10.png?rlkey=fmby751unl22rnjrkgysrl0q6&st=mza2418l&dl=1)
+
 **نقشه به دست آمده**
-![توضیح تصویر](https://www.dropbox.com/scl/fi/h3d3u11p6sazj3yjvfiis/11.png?rlkey=gwluknob2xh5ubpqoxmh8kc0p&st=2dr94fhd&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/h3d3u11p6sazj3yjvfiis/11.png?rlkey=gwluknob2xh5ubpqoxmh8kc0p&st=2dr94fhd&dl=1)
+
 **تحلیل قابلیت دیدن**
 
 زمانی که ما تحلیل سطح انجام می‌دهیم، یکی از تحلیل‌های مهم
@@ -279,14 +283,17 @@ https://www.dropbox.com/scl/fi/2qrjd3x6d1updb5tr8qhd/Screenshot-2025-10-17-12360
 
 برای اینکار از قسمت  raster projection  در ابزار gdal،  wrap را انتخاب کرده
 و source  را همان 4326 نگه داشته و  target  را 32629 انتخاب می‌کنیم.
-![توضیح تصویر](https://www.dropbox.com/scl/fi/cvimfhlp4hh9o6rdc5ogc/12.png?rlkey=2ldh281377q2xdad7fe4mzaja&st=a7kre6rn&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/cvimfhlp4hh9o6rdc5ogc/12.png?rlkey=2ldh281377q2xdad7fe4mzaja&st=a7kre6rn&dl=1)
+
 سپس باید view points را مشخص کنیم. با استفاده از
 ابزاری به همین نام اینکار را انجام می‌دهیم.
-![توضیح تصویر](https://www.dropbox.com/scl/fi/04o9l2g47jjb52cruc033/13.png?rlkey=7dh7a1o0q66afww9c6801fv7f&st=q9e70pj8&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/04o9l2g47jjb52cruc033/13.png?rlkey=7dh7a1o0q66afww9c6801fv7f&st=q9e70pj8&dl=1)
+
 حال برای انجام تحلیل view shed در پنجره آن
 موقعیت بیننده را همان نقطه viewpoint تولید شده انتخاب می‌کنیم و تحلیل را انجام می‌دهیم. 
 در نقشه تولید شده توسط آن یکسری نقاط سیاه و سفید یا همان
 صفر و یکی را مشاهده می‌کنیم که شخص بیننده با توجه به ارتفاعی که در آن قرار دارد
 و توپوگرافی زمین می‌تواند مشاهده کند.
-![توضیح تصویر](https://www.dropbox.com/scl/fi/mz2og396uae8y4ra0z7rl/14.png?rlkey=wjsv4fc78ecl2i3n64rtyirhw&st=sii5h309&dl=0)
-![تصویر 6](https://www.dropbox.com/scl/fi/2qrjd3x6d1updb5tr8qhd/Screenshot-2025-10-17-123602.png?rlkey=6xkqovp9e3rihg9l3d08b7hyb&st=u45cfac0&dl=0)
+![توضیح تصویر](https://www.dropbox.com/scl/fi/mz2og396uae8y4ra0z7rl/14.png?rlkey=wjsv4fc78ecl2i3n64rtyirhw&st=sii5h309&dl=1)
+
+![تصویر 6](https://www.dropbox.com/scl/fi/2qrjd3x6d1updb5tr8qhd/Screenshot-2025-10-17-123602.png?rlkey=6xkqovp9e3rihg9l3d08b7hyb&st=u45cfac0&dl=1)
