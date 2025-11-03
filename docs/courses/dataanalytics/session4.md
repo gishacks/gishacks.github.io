@@ -4,7 +4,6 @@
 [2SFCA Notebook](https://github.com/gishacks/UrbanAnalytics/blob/main/part1/2sfca.ipynb){ .md-button }
 [YouTube :fontawesome-brands-youtube:](https://youtu.be/zfm_gkqAg2Y){ .md-button }
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zfm_gkqAg2Y?si=Mb9lxK3isfbQorwN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 در جلسه3 ، ابتدا به معرفی مدل 2SFCA (Two-Step Floating Catchment Area) پرداختیم. این مدل ابزاری اساسی در شهرسازی است که برای ارزیابی دسترسی به خدمات عمومی، به‌ویژه خدمات بهداشتی و درمانی، طراحی شده است. هدف اصلی مدل 2SFCA شناسایی نابرابری‌های فضایی در دسترسی به منابع و خدمات شهری است. در ابتدا، این مدل میزان دسترسی به خدمات در هر منطقه را محاسبه می‌کند؛ به این صورت که هر مکان خدماتی، مانند بیمارستان یا مدرسه، به جمعیت‌های اطراف خود در یک شعاع خاص، که معمولاً به‌طور استاندارد مشخص می‌شود، ارزیابی می‌شود. سپس، این دسترسی‌ها به‌طور تجمیعی برای هر نقطه جمعیتی محاسبه می‌شود و یک امتیاز کلی از دسترسی به خدمات برای هر ناحیه مشخص می‌شود. در نهایت، این مدل کمک می‌کند تا مناطقی که دسترسی کمتری به خدمات دارند شناسایی و در آن‌ها اقدامات مناسب جهت بهبود دسترسی انجام شود.
 
