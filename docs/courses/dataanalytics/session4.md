@@ -1,5 +1,8 @@
 
 # پیاده‌سازی مدل 2SFCA در پایتون
+[Sample Data](https://github.com/gishacks/UrbanAnalytics/raw/refs/heads/main/part1/data.zip){ .md-button }
+[2SFCA Notebook](https://github.com/gishacks/UrbanAnalytics/blob/main/part1/2sfca.ipynb){ .md-button }
+[YouTube :fontawesome-brands-youtube:](https://youtu.be/zfm_gkqAg2Y){ .md-button }
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zfm_gkqAg2Y?si=Mb9lxK3isfbQorwN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
