@@ -251,7 +251,6 @@ Map.addLayer(tehran_bound, {'color': 'red'}, 'Tehran Bound')
 **فرمت داده‌ها:**
 
 ```
-[طول_غربی, عرض_جنوبی, طول_شرقی, عرض_شمالی]
 [51.0,        35.5,         51.6,        35.9]
 ```
 
@@ -818,45 +817,6 @@ population = ee.Image('WorldPop/GP/100m/pop/IRN_2020')
 ```
 
 **کاربرد:** برنامه‌ریزی شهری و تحلیل دسترسی به خدمات.
-
-***
-
-## ۱۱. نکات پایانی و بهترین شیوه‌ها
-
-### ۱۱.۱ بهینه‌سازی سرعت
-
-برای سرعت بخشیدن به پردازش:
-
-- محدوده را تا حد امکان کوچک کنید
-- بازه زمانی را کوتاه کنید
-- فقط باندهای مورد نیاز را select کنید
-
-
-### ۱۱.۲ مدیریت خطاها
-
-خطاهای رایج و راه‌حل آن‌ها:
-
-- **Image.reduceRegion: Too many pixels**: scale را افزایش دهید
-- **User memory limit exceeded**: region را کوچک‌تر کنید
-- **No images found**: تاریخ یا محدوده را بررسی کنید
-
-
-### ۱۱.۳ ذخیره در Google Drive
-
-برای فایل‌های بزرگ به جای دانلود مستقیم:
-
-```python
-# Export به Google Drive
-task = ee.batch.Export.image.toDrive(
-    image=ndvi,
-    description='Tehran_NDVI',
-    scale=10,
-    region=tehran_bound,
-    fileFormat='GeoTIFF'
-)
-task.start()
-```
-
 
 ***
 
