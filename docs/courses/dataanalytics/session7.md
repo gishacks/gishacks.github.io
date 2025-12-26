@@ -234,10 +234,8 @@ Map = geemap.Map(center=[35.69, 51.39], zoom=10)
 ### ۴.۴ تعریف محدوده مستطیلی
 
 ```python
-# تعریف مستطیل تهران
 tehran_bound = ee.Geometry.Rectangle([51.0, 35.5, 51.6, 35.9])
 
-# اضافه کردن مستطیل به نقشه
 Map.addLayer(tehran_bound, {'color': 'red'}, 'Tehran Bound')
 ```
 
@@ -273,7 +271,6 @@ Map.addLayer(tehran_bound, {'color': 'red'}, 'Tehran Bound')
 ### ۴.۶ نمایش نقشه
 
 ```python
-# نمایش نقشه در Notebook
 Map
 ```
 
@@ -316,7 +313,6 @@ Map
 ### ۵.۴ کد فراخوانی و فیلتر تصاویر
 
 ```python
-# فراخوانی مجموعه تصاویر Sentinel-2
 s2_collection = ee.ImageCollection('COPERNICUS/S2_SR') \
     .filterBounds(tehran_bound) \
     .filterDate('2024-11-01', '2024-11-30') \
@@ -360,7 +356,6 @@ s2_collection = ee.ImageCollection('COPERNICUS/S2_SR') \
 ### ۵.۶ انتخاب باندهای مورد نیاز
 
 ```python
-# انتخاب چهار باند
 s2_selected = s2_collection.select(['B4', 'B3', 'B2', 'B8'])
 ```
 
@@ -391,7 +386,6 @@ s2_selected = s2_collection.select(['B4', 'B3', 'B2', 'B8'])
 ### ۵.۹ محاسبه تصویر ترکیبی (Composite)
 
 ```python
-# محاسبه میانه و برش
 s2_median = s2_selected.median().clip(tehran_bound)
 ```
 
@@ -446,7 +440,6 @@ s2_median = s2_selected.median().clip(tehran_bound)
 ### ۶.۲ کد نمایش
 
 ```python
-# تنظیمات نمایش
 vis_params = {
     'bands': ['B4', 'B3', 'B2'],
     'min': 0,
@@ -524,7 +517,6 @@ $$
 ### ۷.۵ کد محاسبه NDVI
 
 ```python
-# محاسبه NDVI
 ndvi = s2_median.normalizedDifference(['B8', 'B4']).rename('NDVI')
 ```
 
@@ -543,7 +535,6 @@ ndvi = s2_median.normalizedDifference(['B8', 'B4']).rename('NDVI')
 ### ۷.۷ کد نمایش NDVI
 
 ```python
-# تنظیمات نمایش NDVI
 ndvi_vis = {
     'min': -0.2,
     'max': 0.8,
@@ -589,11 +580,9 @@ Map.addLayer(ndvi, ndvi_vis, 'Sentinel NDVI')
 ```python
 import os
 
-# تعیین مسیر ذخیره
 out_dir = os.path.expanduser('~/Downloads')
 out_file = os.path.join(out_dir, 'Tehran_NDVI.tif')
 
-# دانلود تصویر
 geemap.ee_export_image(
     ndvi,
     filename=out_file,
@@ -683,41 +672,28 @@ Error: Image too large. Please reduce scale or region.
 در اینجا کد کامل و آماده اجرا برای کپی در یک فایل پایتون آورده شده است:
 
 ```python
-# ================================================
-# پروژه: دانلود تصویر Sentinel-2 و محاسبه NDVI
-# محدوده: شهر تهران
-# تاریخ: دی ماه ۱۴۰۳
-# ================================================
 
-# گام ۱: وارد کردن کتابخانه‌ها
 import ee
 import geemap
 import os
 
-# گام ۲: احراز هویت (فقط بار اول)
 # ee.Authenticate()
 
-# گام ۳: اتصال به پروژه
 ee.Initialize(project='your-project-name')  # نام پروژه خود را وارد کنید
 
-# گام ۴: ساخت نقشه با مرکزیت تهران
 Map = geemap.Map(center=[35.69, 51.39], zoom=10)
 
-# گام ۵: تعریف محدوده تهران
 tehran_bound = ee.Geometry.Rectangle([51.0, 35.5, 51.6, 35.9])
 Map.addLayer(tehran_bound, {'color': 'red'}, 'Tehran Bound')
 
-# گام ۶: فراخوانی و فیلتر تصاویر Sentinel-2
 s2_collection = ee.ImageCollection('COPERNICUS/S2_SR') \
     .filterBounds(tehran_bound) \
     .filterDate('2024-11-01', '2024-11-30') \
     .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 10))
 
-# گام ۷: انتخاب باندها و محاسبه میانه
 s2_selected = s2_collection.select(['B4', 'B3', 'B2', 'B8'])
 s2_median = s2_selected.median().clip(tehran_bound)
 
-# گام ۸: نمایش تصویر رنگ طبیعی
 vis_params = {
     'bands': ['B4', 'B3', 'B2'],
     'min': 0,
@@ -725,10 +701,8 @@ vis_params = {
 }
 Map.addLayer(s2_median, vis_params, 'Sentinel True Color')
 
-# گام ۹: محاسبه NDVI
 ndvi = s2_median.normalizedDifference(['B8', 'B4']).rename('NDVI')
 
-# گام ۱۰: نمایش NDVI
 ndvi_vis = {
     'min': -0.2,
     'max': 0.8,
@@ -736,10 +710,8 @@ ndvi_vis = {
 }
 Map.addLayer(ndvi, ndvi_vis, 'Sentinel NDVI')
 
-# گام ۱۱: نمایش نقشه
 Map
 
-# گام ۱۲: ذخیره NDVI روی کامپیوتر
 out_dir = os.path.expanduser('~/Downloads')
 out_file = os.path.join(out_dir, 'Tehran_NDVI.tif')
 
@@ -764,7 +736,6 @@ print(f"فایل با موفقیت در {out_file} ذخیره شد.")
 ### ۱۰.۱ تصاویر ماهواره Landsat
 
 ```python
-# دسترسی به تصاویر لندست-۸
 landsat = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2') \
     .filterBounds(tehran_bound) \
     .filterDate('2024-01-01', '2024-12-31')
@@ -780,7 +751,6 @@ landsat = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2') \
 ### ۱۰.۲ داده‌های آلودگی هوا (Sentinel-5P)
 
 ```python
-# غلظت دی‌اکسید نیتروژن (NO2)
 no2 = ee.ImageCollection('COPERNICUS/S5P/NRTI/L3_NO2') \
     .filterDate('2024-11-01', '2024-11-30') \
     .select('NO2_column_number_density')
@@ -791,7 +761,6 @@ no2 = ee.ImageCollection('COPERNICUS/S5P/NRTI/L3_NO2') \
 ### ۱۰.۳ دمای سطح زمین (MODIS)
 
 ```python
-# دمای سطح زمین روزانه
 lst = ee.ImageCollection('MODIS/006/MOD11A1') \
     .filterDate('2024-06-01', '2024-06-30') \
     .select('LST_Day_1km')
@@ -802,7 +771,6 @@ lst = ee.ImageCollection('MODIS/006/MOD11A1') \
 ### ۱۰.۴ نور شب (VIIRS Nighttime Lights)
 
 ```python
-# تصاویر نور شب ماهانه
 nightlights = ee.ImageCollection('NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG') \
     .filterDate('2024-01-01', '2024-12-31')
 ```
@@ -812,7 +780,6 @@ nightlights = ee.ImageCollection('NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG') \
 ### ۱۰.۵ داده‌های جمعیتی
 
 ```python
-# تراکم جمعیت (WorldPop)
 population = ee.Image('WorldPop/GP/100m/pop/IRN_2020')
 ```
 
