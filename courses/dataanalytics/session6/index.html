@@ -1,0 +1,3454 @@
+<!DOCTYPE html><html lang="fa" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../session5/">
+      
+      
+        <link rel="next" href="../session7/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>جلسه ۶ - مصورسازی حرکت - ترفندهای GIS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Vazirmatn";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#while" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href="../../.." title="ترفندهای GIS" class="md-header__button md-logo" aria-label="ترفندهای GIS" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ترفندهای GIS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              جلسه ۶ - مصورسازی حرکت
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gishacks/gishacks.github.io" title="رفتن به مخزن" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    gishacks/main
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  صفحه نخست
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../hacks/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ترفندها
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  دوره‌های آموزشی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  درباره
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../contact/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  تماس
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  بایگانی
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ترفندهای GIS" class="md-nav__button md-logo" aria-label="ترفندهای GIS" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    ترفندهای GIS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gishacks/gishacks.github.io" title="رفتن به مخزن" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    gishacks/main
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    صفحه نخست
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../hacks/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ترفندها
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ترفندها
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/basemaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    افزودن نقشه پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/heatmaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نقشه حرارتی زمان‌مند
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/watershed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    تحلیل حوزه آب‌خیز
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/landcover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نقشه پوشش زمین
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دوره‌های آموزشی
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    دوره‌های آموزشی
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../global-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کار با داده‌های جهانی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    آشنایی با GIS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    آشنایی با GIS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱-مفاهیم GIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲-آشنایی با داده‌ها و نرم‌افزار
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳-نمایش داده‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴-قاب‌بندی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵-گزارش آماری جداول
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۶-انتخاب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۷-تحلیل موقعیت لایه‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۸-تحلیل مطلوبیت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۹-تحلیل فضایی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۰-تحلیل شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۱-ساخت لایه GIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۲-ساخت نقشه آنلاین
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GIS پیشرفته
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GIS پیشرفته
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱ - معرفی و برنامه‌ریزی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳ - تحلیل فضایی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲ - تحلیل سطح
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴ - تحلیل هیدرولوژیک
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵ - ایجاد داده شبکه‌ای
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۶ - تحلیل دسترسی شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۷ - مسیریابی و مبدا-مقصد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۸ - تحلیل کسب‌وکار
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۹ - آمار فضایی پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۰ - رگرسیون فضایی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۱ - تحلیل الگوی آماری
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۲ - مقدمه WebGIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۳ - مبانی طراحی وب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۴ - Leaflet بخش ۱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۵ - Leaflet بخش ۲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۶ - توسعه WebGIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ورود به دنیای برنامه‌نویسی پایتون در GIS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ورود به دنیای برنامه‌نویسی پایتون در GIS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱-مبانی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲-وکتور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳-رستر
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴-آمار
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵-وب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    تحلیل داده‌های شهری
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    تحلیل داده‌های شهری
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱ - آشنایی داده‌های شهری
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲ - پاکسازی داده‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳ - تحلیل جمعیت و تجمیع
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴ - پیاده‌سازی مدل 2SFCA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵ - تحلیل شبکه و دسترسی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۶ - مصورسازی حرکت
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۶ - مصورسازی حرکت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        شرط ادامه: برای مثال، اگر بخواهیم حلقه تا زمانی که یک متغیر به مقدار خاصی رسید ادامه پیدا کند، از while استفاده می‌کنیم.
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۷ - داده‌های سنجش از دور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۸ - پایش محیط زیست
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۹ - تشخیص تغییرات و گسترش
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۰ - بازار مسکن و شاخص‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۱ - داده‌های جرم و خدمات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۲ - تحلیل سیاست و اخلاق
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۳ - داده‌های متنی و شبکه اجتماعی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۴ - مدل‌سازی و شبیه‌سازی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۵ - مصورسازی پیشرفته
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    درباره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    تماس
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    بایگانی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        شرط ادامه: برای مثال، اگر بخواهیم حلقه تا زمانی که یک متغیر به مقدار خاصی رسید ادامه پیدا کند، از while استفاده می‌کنیم.
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/gishacks/gishacks.github.io/edit/main/docs/courses/dataanalytics/session6.md" title="این صفحه را ویرایش کنید" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/gishacks/gishacks.github.io/raw/main/docs/courses/dataanalytics/session6.md" title="محتویات این صفحه را نشان بده" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+  <h1>جلسه ۶ - مصورسازی حرکت</h1>
+
+<p>تفاوت‌های for و while:
+1. استفاده از for:</p>
+<p>وقتی از for استفاده می‌کنیم، معمولاً قصد داریم روی یک مجموعه یا بازه‌ی مشخصی از داده‌ها عملیات انجام دهیم و تعداد دفعات تکرار مشخص است.</p>
+<p>تعداد تکرار معلوم است: به عنوان مثال، وقتی می‌خواهیم از عدد ۱ تا ۱۰۰ چاپ کنیم، می‌دانیم که تعداد تکرارها ۱۰۰ بار است.</p>
+<p>پیمایش عناصر یک آرایه یا لیست: اگر بخواهیم هر عنصر از یک لیست یا آرایه را پردازش کنیم، از for استفاده می‌کنیم.</p>
+<p>کار کردن با بازه‌های عددی (range): مثلا می‌خواهیم از یک عدد شروع کنیم و تا عددی مشخص ادامه دهیم.
+2. استفاده از while:
+از while برای مواقعی مناسب است که نمی‌دانیم چند بار باید حلقه تکرار شود، بلکه تنها یک شرط داریم که تا زمانی که این شرط برقرار باشد، حلقه باید ادامه یابد.</p>
+<p>تعداد تکرار مشخص نیست: این حلقه تا زمانی که شرطی خاص برقرار باشد، ادامه می‌یابد.</p>
+<h2 id="while">شرط ادامه: برای مثال، اگر بخواهیم حلقه تا زمانی که یک متغیر به مقدار خاصی رسید ادامه پیدا کند، از while استفاده می‌کنیم.<a class="headerlink" href="#while" title="Permanent link">¶</a></h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">period</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">60</span>  <span class="c1"># 5 دقیقه</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">tehran_tz</span> <span class="o">=</span> <span class="n">ZoneInfo</span><span class="p">(</span><span class="s2">"Asia/Tehran"</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">tehran_tz</span><span class="p">)</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M"</span><span class="p">)</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">temp_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="s1">'traffic_temp'</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">'Downloading X Tiles ...'</span><span class="p">):</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>            <span class="n">url</span> <span class="o">=</span> <span class="n">URL_Template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">ZOOM</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"ZOOM_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">.mvt"</span><span class="p">)</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>                <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>                <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="ow">and</span> <span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>                <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[WARN] </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="n">gdfs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">temp_path</span><span class="p">):</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'.mvt'</span><span class="p">):</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>            <span class="n">mvt_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>            <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">mvt_path</span><span class="p">)</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>            <span class="n">gdfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="n">merge_gdfs</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">gdfs</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="s1">'EPSG:4326'</span><span class="p">)</span>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="n">merge_gdfs</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'traffic_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s1">.shp'</span><span class="p">))</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>    <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="n">steps</span><span class="p">:</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Idle for </span><span class="si">{</span><span class="n">period</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="mi">60</span><span class="si">}</span><span class="s2"> mins before next step. Run so far </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Completed. Ran </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>        <span class="k">break</span>
+</span></code></pre></div>
+<p>بخش اول: وارد کردن کتابخانه‌ها
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span></code></pre></div>
+کتابخانه time﻿ برای کار با زمان است. در این کد از آن برای توقف موقت برنامه (مثلاً ۵ دقیقه صبر کردن) استفاده می‌شود.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span></code></pre></div>
+یک کلاس است که تاریخ و زمان را نگهداری می‌کند. به ما کمک می‌کند که زمان فعلی را بگیریم و آن را به فرمت دلخواه تبدیل کنیم.<p></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">zoneinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZoneInfo</span>
+</span></code></pre></div>
+<p>برای تعیین منطقه زمانی است. چون می‌خواهیم زمان تهران را داشته باشیم، از این استفاده می‌کنیم.</p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+</span></code></pre></div>
+کتابخانه shutil﻿ برای عملیات پیشرفته روی فایل‌ها و پوشه‌هاست. در اینجا برای حذف پوشه‌های موقت استفاده می‌شود.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span></code></pre></div>
+ کتابخانه‌ای است برای کار با سیستم عامل. با آن می‌توانیم پوشه بسازیم، مسیر فایل‌ها را بسازیم، یا لیست فایل‌های یک پوشه را ببینیم.<p></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+</span></code></pre></div>
+<p>یک نوار پیشرفت (progress bar) در خط فرمان نمایش می‌دهد. وقتی حلقه‌ای طولانی داریم، این نشان می‌دهد چند درصد کار انجام شده است.</p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+</span></code></pre></div>
+کتابخانه requests﻿ برای ارسال درخواست به اینترنت است. با آن می‌توانیم فایل یا داده از یک آدرس اینترنتی دانلود کنیم.<p></p>
+<p>بخش دوم: تنظیمات اولیه
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">steps</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+</span></code></pre></div>
+متغیر steps﻿ تعداد دفعاتی که می‌خواهیم داده دانلود کنیم را مشخص می‌کند (در اینجا ۲ بار). متغیر step﻿ شمارنده‌ای است که از ۰ شروع می‌شود و هر بار یکی اضافه می‌شود.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">period</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">60</span>
+</span></code></pre></div>
+این متغیر فاصله زمانی بین هر دانلود را به ثانیه مشخص می‌کند. 5 * 60﻿ یعنی ۵ دقیقه یا ۳۰۰ ثانیه.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">tehran_tz</span> <span class="o">=</span> <span class="n">ZoneInfo</span><span class="p">(</span><span class="s2">"Asia/Tehran"</span><span class="p">)</span>
+</span></code></pre></div>
+یک شیء منطقه زمانی برای تهران می‌سازیم تا بتوانیم زمان دقیق تهران را بگیریم.<p></p>
+<p>بخش سوم: حلقه اصلی
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></code></pre></div>
+یک حلقه بی‌نهایت است که تا زمانی که دستور break﻿ اجرا نشود، ادامه می‌یابد.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">tehran_tz</span><span class="p">)</span>
+</span></code></pre></div>
+زمان فعلی را با منطقه زمانی تهران می‌گیریم و در متغیر now﻿ ذخیره می‌کنیم.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">timestamp</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M"</span><span class="p">)</span>
+</span></code></pre></div>
+تاریخ و زمان را به یک رشته متنی با فرمت خاص تبدیل می‌کنیم. مثلاً 20251114_2334﻿ که یعنی سال ۲۰۲۵، ماه ۱۱، روز ۱۴، ساعت ۲۳، دقیقه ۳۴. این برای نام‌گذاری فایل‌ها استفاده می‌شود.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">temp_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="s1">'traffic_temp'</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+</span></code></pre></div>
+یک مسیر کامل برای پوشه موقت می‌سازیم.  مثلاً data/traffic_temp/20251114_2334﻿.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div>
+پوشه را می‌سازیم. پارامتر exist_ok=True﻿ یعنی اگر پوشه از قبل وجود دارد، خطا ندهد و ادامه بده.<p></p>
+<p>بخش چهارم: دانلود کاشی‌ها
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">'Downloading X Tiles ...'</span><span class="p">):</span>
+</span></code></pre></div>
+یک حلقه که از x_min﻿ تا x_max﻿ (شامل x_max﻿) تکرار می‌شود. tqdm﻿ نوار پیشرفت نمایش می‌دهد و desc﻿ متنی است که روی نوار پیشرفت نمایش داده می‌شود.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span></code></pre></div>
+یک حلقه تو در تو برای مختصات y﻿. این دو حلقه باعث می‌شوند تمام کاشی‌های یک ناحیه مستطیلی دانلود شوند.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">url</span> <span class="o">=</span> <span class="n">URL_Template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">ZOOM</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</span></code></pre></div>
+آدرس کامل هر کاشی را می‌سازیم. URL_Template﻿ یک رشته قالبی است مثل "<a href="http://example.com/{z}/{x}/{y}.mvt">http://example.com/{z}/{x}/{y}.mvt</a>"﻿ که مقادیر {z}﻿، {x}﻿، {y}﻿ با اعداد واقعی جایگزین می‌شوند.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"ZOOM_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">.mvt"</span><span class="p">)</span>
+</span></code></pre></div>
+نام و مسیر فایل خروجی را می‌سازیم. f"ZOOM_{x}_{y}.mvt"﻿ یک f-string است که متغیرها را داخل رشته قرار می‌دهد. مثلاً ZOOM_100_50.mvt﻿.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</span></code></pre></div>
+بلوک try-except﻿ برای مدیریت خطاهاست. اگر خطایی رخ دهد، برنامه متوقف نمی‌شود. requests.get﻿ درخواست دانلود را ارسال می‌کند و timeout=15﻿ یعنی اگر ظرف ۱۵ ثانیه جواب نیامد، خطا بده.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="ow">and</span> <span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+</span></code></pre></div>
+بررسی می‌کنیم که آیا دانلود موفق بوده (یعنی موفق) و محتوایی وجود دارد.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span></code></pre></div>
+فایل را برای نوشتن باز می‌کنیم. 'wb'﻿ یعنی حالت نوشتن دودویی (برای فایل‌های غیر متنی). with﻿ باعث می‌شود فایل بعد از اتمام کار خودکار بسته شود. محتوای دانلود شده را در فایل می‌نویسیم.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[WARN] </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+اگر دانلود موفق نبود، یک پیغام هشدار نمایش می‌دهیم.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[ERROR] </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+اگر هر خطای دیگری رخ داد (مثلاً مشکل اینترنت)، پیغام خطا را نمایش می‌دهیم.<p></p>
+<p>بخش پنجم: ادغام فایل‌ها
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">gdfs</span> <span class="o">=</span> <span class="p">[]</span>
+</span></code></pre></div>
+یک لیست خالی برای نگهداری داده‌های جغرافیایی می‌سازیم.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">temp_path</span><span class="p">):</span>
+</span></code></pre></div>
+لیست تمام فایل‌های درون پوشه موقت را می‌گیریم و روی آنها حلقه می‌زنیم.<p></p>
+<p>python
+if file.endswith('.mvt'):
+فقط فایل‌هایی که با .mvt﻿ تمام می‌شوند را پردازش می‌کنیم.</p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">mvt_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">mvt_path</span><span class="p">)</span>
+</span></code></pre></div>
+مسیر کامل فایل را می‌سازیم و سپس فایل MVT﻿ را با geopandas﻿ می‌خوانیم. این فایل را به یک GeoDataFrame تبدیل می‌کند.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">gdfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+</span></code></pre></div>
+در اینجا GeoDataFrame را به لیست اضافه می‌کنیم.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">merge_gdfs</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">gdfs</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="s1">'EPSG:4326'</span><span class="p">)</span><span class="n">پ</span>
+</span></code></pre></div>
+تمام GeoDataFrame‌ها را به هم می‌چسبانیم. pd.concat﻿ آنها را به صورت عمودی (ردیف به ردیف) ترکیب می‌کند. ignore_index=True﻿ یعنی شماره ردیف‌ها را از نو شروع کن. crs='EPSG:4326'﻿ سیستم مختصات جغرافیایی (طول و عرض جغرافیایی) را تعیین می‌کند.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">merge_gdfs</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'traffic_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s1">.shp'</span><span class="p">))</span>
+</span></code></pre></div>
+داده‌های ادغام شده را به صورت یک فایل شیپ فایل ذخیره می‌کنیم. نام فایل شامل تاریخ و زمان است.<p></p>
+<p>بخش ششم: پاکسازی و کنترل حلقه
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+</span></code></pre></div>
+کل پوشه موقت و تمام محتویات آن را حذف می‌کنیم. rmtree﻿ یعنی حذف بازگشتی (پوشه و زیرپوشه‌ها و فایل‌های داخل آن).<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></code></pre></div>
+شمارنده را یکی افزایش می‌دهیم. این معادل step = step + 1﻿ است.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="k">if</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="n">steps</span><span class="p">:</span>
+</span></code></pre></div>
+بررسی می‌کنیم که آیا هنوز مرحله بیشتری باقی مانده یا نه.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Idle for </span><span class="si">{</span><span class="n">period</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="mi">60</span><span class="si">}</span><span class="s2"> mins before next step. Run so far </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+</span></code></pre></div>
+پیغامی نمایش می‌دهیم که چند دقیقه صبر می‌کنیم. //﻿ عملگر تقسیم صحیح است که نتیجه را گرد می‌کند. سپس برنامه را به اندازه period﻿ ثانیه متوقف می‌کنیم.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Completed. Ran </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">steps</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>    <span class="k">break</span>
+</span></code></pre></div>
+اگر به تعداد دفعات مورد نظر رسیدیم، پیغام پایان کار را نمایش می‌دهیم و با break﻿ از حلقه خارج می‌شویم.<p></p>
+<p>خلاصه کارکرد کلی
+این کد هر ۵ دقیقه یکبار (۲ بار در مجموع) داده‌های ترافیک را از یک سرویس نقشه به صورت کاشی‌های MVT دانلود می‌کند، آنها را در یک پوشه موقت ذخیره می‌کند، سپس تمام کاشی‌ها را می‌خواند، به هم می‌چسباند و به صورت یک فایل شیپ فایل نهایی ذخیره می‌کند. در نهایت فایل‌های موقت را پاک می‌کند و منتظر دوره بعدی می‌ماند.</p>
+<p>در بخش بعدی 
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">osmnx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ox</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="n">G_OSM</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_bbox</span><span class="p">(</span><span class="o">*</span><span class="n">BBOX</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s1">'drive'</span><span class="p">)</span>
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="c1"># استخراج بخش‌های جاده‌ای</span>
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="n">osm_segments</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">G_OSM</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="c1"># استخراج نقاط (نودها)</span>
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="n">osm_nodes</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">G_OSM</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>
+</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a><span class="c1"># چاپ داده‌ها</span>
+</span><span id="__span-36-12"><a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">osm_segments</span><span class="o">.</span><span class="n">head</span><span class="p">())</span> 
+</span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">osm_nodes</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>    
+</span></code></pre></div>
+این خط شبکه جاده‌ای را از OpenStreetMap دانلود می‌کند.
+بخش‌های این خط:<p></p>
+<p>استفاده از ox.graph_from_bbox()﻿: تابعی از کتابخانه OSMnx است که داده‌های شبکه خیابان‌ها را از OpenStreetMap بر اساس یک محدوده جغرافیایی (bounding box) دانلود می‌کند.​</p>
+<p>همچنین network_type='drive'﻿: نوع شبکه را مشخص می‌کند. 'drive'﻿ یعنی فقط جاده‌هایی که ماشین می‌تواند در آنها تردد کند. انواع دیگر عبارتند از 'walk'﻿ برای مسیرهای پیاده، 'bike'﻿ برای مسیرهای دوچرخه، و 'all'﻿ برای همه انواع.​​</p>
+<p>وG_OSM﻿: خروجی این تابع یک graph (گراف) است. گراف یک ساختار داده ریاضی است که از نقاط (nodes) و خطوط رابط (edges) تشکیل شده است. در شبکه جاده‌ای، نقاط معمولاً تقاطع‌ها و انتهای خیابان‌ها هستند و خطوط رابط خود خیابان‌ها هستند.​​</p>
+<p>خط دوم: استخراج بخش‌های جاده‌ای
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">osm_segments</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">G_OSM</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div>
+این خط بخش‌های جاده‌ای (خیابان‌ها) را از گراف استخراج می‌کند و به یک GeoDataFrame تبدیل می‌کند.​<p></p>
+<p>استفاده از ox.graph_to_gdfs()﻿: تابعی است که گراف را به GeoDataFrame تبدیل می‌کند. GeoDataFrame مانند یک جدول است که ستون‌های جغرافیایی دارد.​</p>
+<p>این nodes=False﻿: یعنی نقاط (تقاطع‌ها) را در خروجی نیاور.​</p>
+<p>همچنین edges=True﻿: یعنی فقط یال‌ها (خیابان‌ها و بخش‌های جاده‌ای) را در خروجی بیاور.​</p>
+<p>چرا این کار را انجام می‌دهیم؟ گراف یک ساختار داده پیچیده است که برای تحلیل‌های خاص مناسب است، اما برای کار با داده‌های جغرافیایی، پردازش، و ذخیره‌سازی، GeoDataFrame راحت‌تر است چون می‌توانیم آن را مانند یک جدول فیلتر کنیم، ستون‌ها را تغییر دهیم، و به فرمت‌های مختلف (مثل Shapefile) ذخیره کنیم.​</p>
+<p>استفاده از osm_segments﻿: یک GeoDataFrame است که هر ردیف آن یک قطعه از جاده را نشان می‌دهد. این جدول ستون‌هایی مانند نام خیابان، نوع جاده، حداکثر سرعت، و هندسه خط (LineString) دارد.​</p>
+<p>خط سوم: استخراج نقاط (نودها)
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">osm_nodes</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_to_gdfs</span><span class="p">(</span><span class="n">G_OSM</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></code></pre></div>
+این خط نقاط شبکه (تقاطع‌ها و انتهای خیابان‌ها) را از گراف استخراج می‌کند.
+در​ این خط nodes=True﻿: یعنی نقاط (nodes) را در خروجی بیاور.​<p></p>
+<p>و edges=False﻿: یعنی یال‌ها (خیابان‌ها) را در خروجی نیاور.​</p>
+<p>و osm_nodes﻿: یک GeoDataFrame است که هر ردیف آن یک نقطه (تقاطع یا انتهای خیابان) را نشان می‌دهد. این جدول ستون‌هایی مانند طول و عرض جغرافیایی، و هندسه نقطه (Point) دارد.​</p>
+<p>خط‌های چهارم و پنجم: نمایش داده‌ها
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">osm_segments</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">osm_nodes</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span></code></pre></div>
+استفاده از .head()﻿: یک متد از pandas است که ۵ ردیف اول یک جدول را نمایش می‌دهد. این برای بررسی سریع ساختار داده‌ها مفید است.​<p></p>
+<p>خط اول: اولین ۵ قطعه جاده را نمایش می‌دهد. شما می‌توانید ببینید هر خیابان چه ویژگی‌هایی دارد (مثلاً نام، طول، نوع).​</p>
+<p>خط دوم: اولین ۵ نقطه (تقاطع) را نمایش می‌دهد. شما می‌توانید مختصات جغرافیایی و سایر اطلاعات هر تقاطع را ببینید.​</p>
+<p>خلاصه کارکرد کلی
+این کد سه کار اصلی انجام می‌دهد:​</p>
+<p>شبکه جاده‌ای یک منطقه را از OpenStreetMap دانلود می‌کند (در قالب گراف)</p>
+<p>بخش‌های جاده‌ای (خطوط) را از گراف جدا می‌کند و به GeoDataFrame تبدیل می‌کند</p>
+<p>نقاط تقاطع را از گراف جدا می‌کند و به GeoDataFrame تبدیل می‌کند</p>
+<p>بعد از این مراحل، شما دو جدول جغرافیایی دارید که می‌توانید آنها را تحلیل کنید، فیلتر کنید، روی نقشه نمایش دهید، یا به فرمت‌های دیگر (مثل Shapefile) ذخیره کنید.​</p>
+<hr>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">osm_segments</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</span></code></pre></div>
+وقتی که داده‌ها را از OpenStreetMap می‌گیرید و آن‌ها را به GeoDataFrame تبدیل می‌کنید، ممکنه ایندکس‌ها درست مرتب نشده باشند یا ترتیبشان به هم خورده باشد.<p></p>
+<p>با استفاده از reset_index(), ایندکس‌ها به شکل استاندارد (عدد صحیح متوالی) برمی‌گردند و ستون ایندکس قبلی به نام "index" به DataFrame اضافه می‌شود.</p>
+<hr>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>
+</span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="n">traffic_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT_DIR</span><span class="p">,</span> <span class="s1">'traffic_*.shp'</span><span class="p">))</span>
+</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="n">traffic_gdfs</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-41-8"><a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>
+</span><span id="__span-41-9"><a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">traffic_files</span><span class="p">:</span>
+</span><span id="__span-41-10"><a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'traffic_20'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.shp'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+</span><span id="__span-41-11"><a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a>    <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">osm_segments</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</span><span id="__span-41-12"><a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>    <span class="n">traffic_gdfs</span><span class="p">[</span><span class="n">timestamp</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span>
+</span><span id="__span-41-13"><a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>
+</span><span id="__span-41-14"><a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'maxspeed'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
+</span><span id="__span-41-15"><a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</span><span id="__span-41-16"><a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_mps'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+</span><span id="__span-41-17"><a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a>
+</span><span id="__span-41-18"><a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a><span class="n">congestion_factors</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-41-19"><a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a>    <span class="s1">'low'</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+</span><span id="__span-41-20"><a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a>    <span class="s1">'moderate'</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+</span><span id="__span-41-21"><a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a>    <span class="s1">'heavy'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-41-22"><a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a>    <span class="s1">'severe'</span><span class="p">:</span> <span class="mf">0.3</span>
+</span><span id="__span-41-23"><a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a><span class="p">}</span>
+</span><span id="__span-41-24"><a id="__codelineno-41-24" name="__codelineno-41-24" href="#__codelineno-41-24"></a>
+</span><span id="__span-41-25"><a id="__codelineno-41-25" name="__codelineno-41-25" href="#__codelineno-41-25"></a><span class="k">for</span> <span class="n">ts</span><span class="p">,</span> <span class="n">tgdf</span> <span class="ow">in</span> <span class="n">traffic_gdfs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-41-26"><a id="__codelineno-41-26" name="__codelineno-41-26" href="#__codelineno-41-26"></a>    <span class="n">joined</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span>
+</span><span id="__span-41-27"><a id="__codelineno-41-27" name="__codelineno-41-27" href="#__codelineno-41-27"></a>        <span class="n">osm_segments</span><span class="p">,</span>
+</span><span id="__span-41-28"><a id="__codelineno-41-28" name="__codelineno-41-28" href="#__codelineno-41-28"></a>        <span class="n">tgdf</span><span class="p">[[</span><span class="s1">'geometry'</span><span class="p">,</span> <span class="s1">'congestion'</span><span class="p">]],</span>
+</span><span id="__span-41-29"><a id="__codelineno-41-29" name="__codelineno-41-29" href="#__codelineno-41-29"></a>        <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span>
+</span><span id="__span-41-30"><a id="__codelineno-41-30" name="__codelineno-41-30" href="#__codelineno-41-30"></a>        <span class="n">predicate</span><span class="o">=</span><span class="s1">'intersects'</span>
+</span><span id="__span-41-31"><a id="__codelineno-41-31" name="__codelineno-41-31" href="#__codelineno-41-31"></a>    <span class="p">)</span>
+</span><span id="__span-41-32"><a id="__codelineno-41-32" name="__codelineno-41-32" href="#__codelineno-41-32"></a>
+</span><span id="__span-41-33"><a id="__codelineno-41-33" name="__codelineno-41-33" href="#__codelineno-41-33"></a>    <span class="n">joined</span> <span class="o">=</span> <span class="n">joined</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">'congestion'</span><span class="p">:</span> <span class="s1">'first'</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</span><span id="__span-41-34"><a id="__codelineno-41-34" name="__codelineno-41-34" href="#__codelineno-41-34"></a>    <span class="n">joined</span> <span class="o">=</span> <span class="n">joined</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'congestion'</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'cg_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">})</span>
+</span><span id="__span-41-35"><a id="__codelineno-41-35" name="__codelineno-41-35" href="#__codelineno-41-35"></a>
+</span><span id="__span-41-36"><a id="__codelineno-41-36" name="__codelineno-41-36" href="#__codelineno-41-36"></a>    <span class="n">osm_segments</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+</span><span id="__span-41-37"><a id="__codelineno-41-37" name="__codelineno-41-37" href="#__codelineno-41-37"></a>        <span class="n">joined</span><span class="p">[[</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'cg_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]],</span>
+</span><span id="__span-41-38"><a id="__codelineno-41-38" name="__codelineno-41-38" href="#__codelineno-41-38"></a>        <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">],</span>
+</span><span id="__span-41-39"><a id="__codelineno-41-39" name="__codelineno-41-39" href="#__codelineno-41-39"></a>        <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span>
+</span><span id="__span-41-40"><a id="__codelineno-41-40" name="__codelineno-41-40" href="#__codelineno-41-40"></a>    <span class="p">)</span>
+</span><span id="__span-41-41"><a id="__codelineno-41-41" name="__codelineno-41-41" href="#__codelineno-41-41"></a>
+</span><span id="__span-41-42"><a id="__codelineno-41-42" name="__codelineno-41-42" href="#__codelineno-41-42"></a>    <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'cg_w_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'cg_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">congestion_factors</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-41-43"><a id="__codelineno-41-43" name="__codelineno-41-43" href="#__codelineno-41-43"></a>    <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'adj_spd_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_mps'</span><span class="p">]</span> <span class="o">*</span> <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'cg_w_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span>
+</span><span id="__span-41-44"><a id="__codelineno-41-44" name="__codelineno-41-44" href="#__codelineno-41-44"></a>    <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'trvl_time_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'length'</span><span class="p">]</span> <span class="o">/</span> <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'adj_spd_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span>
+</span></code></pre></div>
+بخش اول: وارد کردن کتابخانه‌ها و یافتن فایل‌ها
+<div class="language-python highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+</span><span id="__span-42-4"><a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span></code></pre></div>
+کتابخانه glob﻿ برای جستجوی فایل‌ها با الگوی خاص استفاده می‌شود. کتابخانه os﻿ برای کار با مسیرها و سیستم عامل است. geopandas﻿ برای کار با داده‌های جغرافیایی و pandas﻿ برای مدیریت جداول داده استفاده می‌شود.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">traffic_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT_DIR</span><span class="p">,</span> <span class="s1">'traffic_*.shp'</span><span class="p">))</span>
+</span></code></pre></div>
+متغیر traffic_files﻿ لیستی از تمام فایل‌های شیپ فایلی که با traffic_﻿ شروع می‌شوند را در پوشه OUT_DIR﻿ پیدا می‌کند. علامت *﻿ یک wildcard است که به معنای "هر چیزی" است. مثلاً traffic_20251114_2330.shp﻿ و traffic_20251114_2335.shp﻿ را پیدا می‌کند.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">traffic_gdfs</span> <span class="o">=</span> <span class="p">{}</span>
+</span></code></pre></div>
+دیکشنری خالی است که قرار است داده‌های ترافیکی را با کلید timestamp (زمان) ذخیره کند.​<p></p>
+<p>بخش دوم: خواندن فایل‌های ترافیکی
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">traffic_files</span><span class="p">:</span>
+</span></code></pre></div>
+حلقه‌ای است که روی تمام فایل‌های پیدا شده تکرار می‌شود.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">timestamp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'traffic_20'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.shp'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+</span></code></pre></div>
+زمان (timestamp) را از نام فایل استخراج می‌کند. ابتدا os.path.basename()﻿ فقط نام فایل را بدون مسیر کامل برمی‌گرداند (مثلاً traffic_20251114_2330.shp﻿). سپس replace()﻿ قسمت traffic_20﻿ و .shp﻿ را حذف می‌کند و فقط 251114_2330﻿ باقی می‌ماند.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">osm_segments</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</span></code></pre></div>
+فایل شیپ فایل را می‌خواند و به GeoDataFrame تبدیل می‌کند. متد .to_crs()﻿ سیستم مختصات جغرافیایی (CRS) را به همان سیستمی که osm_segments﻿ دارد تبدیل می‌کند تا بتوانیم آنها را روی هم قرار دهیم. این مرحله برای تحلیل‌های مکانی بسیار مهم است.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="n">traffic_gdfs</span><span class="p">[</span><span class="n">timestamp</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span>
+</span></code></pre></div>
+داده‌های خوانده شده را با کلید timestamp در دیکشنری ذخیره می‌کند.​<p></p>
+<p>بخش سوم: محاسبه سرعت‌های مجاز
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'maxspeed'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
+</span></code></pre></div>
+ستون maxspeed﻿ که از OpenStreetMap آمده را به عدد تبدیل می‌کند. پارامتر errors='coerce'﻿ یعنی اگر مقداری قابل تبدیل به عدد نبود، آن را NaN﻿ (مقدار خالی) قرار بده.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</span></code></pre></div>
+مقادیر خالی (NaN﻿) را با عدد ۳۰ پر می‌کند. این یعنی اگر سرعت مجاز برای یک جاده مشخص نبود، فرض می‌کنیم ۳۰ کیلومتر بر ساعت است.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_mps'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_kmh'</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+</span></code></pre></div>
+سرعت را از کیلومتر بر ساعت به متر بر ثانیه تبدیل می‌کند. فرمول: ۱ کیلومتر = ۱۰۰۰ متر و ۱ ساعت = ۳۶۰۰ ثانیه، پس ضرب در ۱۰۰۰ و تقسیم بر ۳۶۰۰.​<p></p>
+<p>بخش چهارم: تعریف ضرایب ترافیک
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="n">congestion_factors</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-52-2"><a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>    <span class="s1">'low'</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+</span><span id="__span-52-3"><a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>    <span class="s1">'moderate'</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+</span><span id="__span-52-4"><a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>    <span class="s1">'heavy'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-52-5"><a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a>    <span class="s1">'severe'</span><span class="p">:</span> <span class="mf">0.3</span>
+</span><span id="__span-52-6"><a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="p">}</span>
+</span></code></pre></div>
+دیکشنری است که برای هر وضعیت ترافیک یک ضریب کاهش سرعت تعریف می‌کند. مثلاً 'low'﻿ (ترافیک کم) یعنی ماشین‌ها با ۹۰٪ سرعت مجاز حرکت می‌کنند، و 'severe'﻿ (ترافیک شدید) یعنی فقط ۳۰٪ سرعت مجاز.​<p></p>
+<p>بخش پنجم: پیوند دادن داده‌های ترافیک
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="k">for</span> <span class="n">ts</span><span class="p">,</span> <span class="n">tgdf</span> <span class="ow">in</span> <span class="n">traffic_gdfs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></code></pre></div>
+حلقه‌ای است که روی تمام زمان‌بندی‌های ترافیک تکرار می‌شود. متغیر ts﻿ زمان (timestamp) و tgdf﻿ داده‌های ترافیک آن زمان است.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="n">joined</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span>
+</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>    <span class="n">osm_segments</span><span class="p">,</span>
+</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>    <span class="n">tgdf</span><span class="p">[[</span><span class="s1">'geometry'</span><span class="p">,</span> <span class="s1">'congestion'</span><span class="p">]],</span>
+</span><span id="__span-54-4"><a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>    <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span>
+</span><span id="__span-54-5"><a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>    <span class="n">predicate</span><span class="o">=</span><span class="s1">'intersects'</span>
+</span><span id="__span-54-6"><a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a><span class="p">)</span>
+</span></code></pre></div>
+عملیات spatial join﻿ است که دو لایه جغرافیایی را بر اساس موقعیت مکانی به هم متصل می‌کند. پارامتر how='left'﻿ یعنی تمام ردیف‌های osm_segments﻿ را نگه دار حتی اگر داده ترافیک نداشتند. پارامتر predicate='intersects'﻿ یعنی اگر دو شکل هندسی با هم تقاطع داشتند، آنها را به هم وصل کن.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="n">joined</span> <span class="o">=</span> <span class="n">joined</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">'congestion'</span><span class="p">:</span> <span class="s1">'first'</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</span></code></pre></div>
+داده‌ها را بر اساس شناسه منحصر به فرد هر بخش جاده (u﻿، v﻿، key﻿) گروه‌بندی می‌کند. این سه ستون شناسه یال (edge) در گراف OSMnx هستند: u﻿ نود مبدأ، v﻿ نود مقصد، و key﻿ شناسه یال در صورت وجود چند یال بین دو نود. متد agg({'congestion': 'first'})﻿ اولین مقدار ترافیک را برای هر گروه انتخاب می‌کند.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="n">joined</span> <span class="o">=</span> <span class="n">joined</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'congestion'</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'cg_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">})</span>
+</span></code></pre></div>
+نام ستون ترافیک را تغییر می‌دهد و timestamp را به آن اضافه می‌کند. مثلاً cg_251114_2330﻿ که نشان می‌دهد این داده ترافیک مربوط به چه زمانی است.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="n">osm_segments</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+</span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>    <span class="n">joined</span><span class="p">[[</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'cg_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]],</span>
+</span><span id="__span-57-3"><a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a>    <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'u'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">],</span>
+</span><span id="__span-57-4"><a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>    <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span>
+</span><span id="__span-57-5"><a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="p">)</span>
+</span></code></pre></div>
+داده‌های ترافیک را به جدول اصلی osm_segments﻿ اضافه می‌کند. عملیات merge﻿ دو جدول را بر اساس ستون‌های مشترک (u﻿، v﻿، key﻿) به هم می‌چسباند.​<p></p>
+<p>بخش ششم: محاسبه سرعت و زمان سفر
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'cg_w_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'cg_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">congestion_factors</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></code></pre></div>
+وضعیت ترافیک را به ضریب عددی تبدیل می‌کند. متد map()﻿ مقادیر را بر اساس دیکشنری congestion_factors﻿ تبدیل می‌کند. مثلاً 'moderate'﻿ به 0.7﻿ تبدیل می‌شود. متد fillna(1)﻿ برای جاده‌هایی که اطلاعات ترافیک ندارند، ضریب ۱ (بدون کاهش سرعت) می‌دهد.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'adj_spd_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'max_speed_mps'</span><span class="p">]</span> <span class="o">*</span> <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'cg_w_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span>
+</span></code></pre></div>
+سرعت تعدیل شده را بر اساس ترافیک محاسبه می‌کند. این سرعت واقعی است که با ضرب سرعت مجاز در ضریب ترافیک به دست می‌آید. مثلاً اگر سرعت مجاز ۱۰ متر بر ثانیه و ضریب ۰.۷ باشد، سرعت واقعی ۷ متر بر ثانیه است.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'trvl_time_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="p">[</span><span class="s1">'length'</span><span class="p">]</span> <span class="o">/</span> <span class="n">osm_segments</span><span class="p">[</span><span class="sa">f</span><span class="s1">'adj_spd_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span>
+</span></code></pre></div>
+زمان سفر را برای هر بخش جاده محاسبه می‌کند. فرمول ساده است: زمان = مسافت ÷ سرعت. ستون length﻿ طول جاده به متر است و با تقسیم بر سرعت (متر بر ثانیه)، زمان سفر به ثانیه به دست می‌آید. این زمان‌ها بعداً برای محاسبه کوتاه‌ترین مسیر بر اساس زمان (نه فقط مسافت) استفاده می‌شوند.​<p></p>
+<p>خلاصه کارکرد کلی
+این کد داده‌های ترافیک لحظه‌ای را با شبکه جاده‌ای OpenStreetMap ترکیب می‌کند و برای هر بخش جاده در هر زمان، سرعت واقعی و زمان سفر را بر اساس وضعیت ترافیک محاسبه می‌کند. این اطلاعات برای تحلیل‌های مسیریابی (routing) و پیش‌بینی زمان سفر در شبکه حمل‌ونقل شهری استفاده می‌شود.​</p>
+<hr>
+<p>این کد یک گراف NetworkX از داده‌های جغرافیایی OSM می‌سازد. هر خیابان به عنوان یک یال در گراف نمایش داده می‌شود که سه ویژگی دارد: طول فیزیکی و دو زمان سفر برای دو بازه زمانی مختلف. برای خیابان‌های دوطرفه، دو یال در جهت‌های مخالف اضافه می‌شود.
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+</span><span id="__span-61-2"><a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+</span><span id="__span-61-3"><a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">osm_segments</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span><span id="__span-61-4"><a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>    <span class="n">u</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'u'</span><span class="p">]</span>
+</span><span id="__span-61-5"><a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'v'</span><span class="p">]</span>
+</span><span id="__span-61-6"><a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a>    <span class="n">length</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'length'</span><span class="p">]</span>
+</span><span id="__span-61-7"><a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a>    <span class="n">time1</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'trvl_time_251031_1650'</span><span class="p">]</span>
+</span><span id="__span-61-8"><a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a>    <span class="n">time2</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'trvl_time_251031_1656'</span><span class="p">]</span>
+</span><span id="__span-61-9"><a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a>    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">time1</span><span class="p">,</span> <span class="n">time2</span><span class="o">=</span><span class="n">time2</span><span class="p">)</span>
+</span><span id="__span-61-10"><a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a>
+</span><span id="__span-61-11"><a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">row</span><span class="p">[</span><span class="s1">'oneway'</span><span class="p">]:</span>
+</span><span id="__span-61-12"><a id="__codelineno-61-12" name="__codelineno-61-12" href="#__codelineno-61-12"></a>        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">time1</span><span class="p">,</span> <span class="n">time2</span><span class="o">=</span><span class="n">time2</span><span class="p">)</span>
+</span></code></pre></div>
+توضیح کد:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+</span></code></pre></div>
+ساخت یک گراف جهت‌دار چندگانه (MultiDiGraph) خالی است. این نوع گراف سه ویژگی مهم دارد: اول، جهت‌دار است یعنی یال از نود A به نود B با یال از B به A متفاوت است. دوم، چندگانه است یعنی می‌تواند چندین یال موازی بین دو نود داشته باشد. سوم، هر یال می‌تواند ویژگی‌های دلخواه (مانند طول یا زمان) داشته باشد.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">osm_segments</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span></code></pre></div>
+حلقه‌ای است که روی تمام ردیف‌های GeoDataFrame به نام osm_segments﻿ تکرار می‌شود. متد iterrows()﻿ دو مقدار برمی‌گرداند: idx﻿ که شماره ردیف (index) است و row﻿ که خود ردیف به صورت یک Series است. این روش استاندارد برای پیمایش داده‌های pandas است.<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="n">u</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'u'</span><span class="p">]</span>
+</span><span id="__span-64-2"><a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="n">v</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'v'</span><span class="p">]</span>
+</span></code></pre></div>
+استخراج شناسه نودهای مبدأ و مقصد هر یال است. در گراف‌های OSMnx، u﻿ نود شروع (source node) و v﻿ نود پایان (target node) هر خیابان را نشان می‌دهد. این‌ها معمولاً شماره‌های منحصر به فرد نودها در OpenStreetMap هستند.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="n">length</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'length'</span><span class="p">]</span>
+</span></code></pre></div>
+طول جاده را از ستون length﻿ استخراج می‌کند. این مقدار معمولاً به متر است و از محاسبات جغرافیایی OSMnx به دست آمده است.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-66-1"><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="n">time1</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'trvl_time_251031_1650'</span><span class="p">]</span>
+</span><span id="__span-66-2"><a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="n">time2</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'trvl_time_251031_1656'</span><span class="p">]</span>
+</span></code></pre></div>
+زمان سفر را برای دو بازه زمانی مختلف استخراج می‌کند. ستون trvl_time_251031_1650﻿ زمان سفر در تاریخ ۳۱ اکتبر سال ۲۰۲۵ ساعت ۱۶:۵۰ است و trvl_time_251031_1656﻿ برای ساعت ۱۶:۵۶ است. این زمان‌ها قبلاً با در نظر گرفتن وضعیت ترافیک محاسبه شده‌اند.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-67-1"><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">time1</span><span class="p">,</span> <span class="n">time2</span><span class="o">=</span><span class="n">time2</span><span class="p">)</span>
+</span></code></pre></div>
+یک یال جهت‌دار از نود u﻿ به نود v﻿ به گراف اضافه می‌کند. پارامترهای length﻿، time1﻿، و time2﻿ به عنوان ویژگی‌های (attributes) این یال ذخیره می‌شوند. این ویژگی‌ها بعداً برای الگوریتم‌های مسیریابی (مثل کوتاه‌ترین مسیر بر اساس زمان) استفاده می‌شوند.​<p></p>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-68-1"><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">row</span><span class="p">[</span><span class="s1">'oneway'</span><span class="p">]:</span>
+</span><span id="__span-68-2"><a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">time1</span><span class="p">,</span> <span class="n">time2</span><span class="o">=</span><span class="n">time2</span><span class="p">)</span>
+</span></code></pre></div>
+بررسی می‌کند که آیا خیابان یک‌طرفه است یا نه. ستون oneway﻿ اگر True﻿ باشد یعنی جاده یک‌طرفه است و فقط از u﻿ به v﻿ قابل تردد است. اگر False﻿ یا NaN﻿ باشد، جاده دوطرفه است و یال معکوس (از v﻿ به u﻿) نیز با همان ویژگی‌ها به گراف اضافه می‌شود.​<p></p>
+<p>خلاصه کارکرد کلی
+این کد یک گراف NetworkX از داده‌های جغرافیایی OSM می‌سازد. هر خیابان به عنوان یک یال در گراف نمایش داده می‌شود که سه ویژگی دارد: طول فیزیکی و دو زمان سفر برای دو بازه زمانی مختلف. برای خیابان‌های دوطرفه، دو یال در جهت‌های مخالف اضافه می‌شود. </p>
+<hr>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-69-1"><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">osm_nodes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span><span id="__span-69-2"><a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>    <span class="n">attrs</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'geometry'</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+</span><span id="__span-69-3"><a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a>    <span class="n">attrs</span><span class="p">[</span><span class="s1">'geometry'</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">geometry</span>
+</span><span id="__span-69-4"><a id="__codelineno-69-4" name="__codelineno-69-4" href="#__codelineno-69-4"></a>    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+</span></code></pre></div>
+این کد تمام نودهای (تقاطع‌ها و انتهای خیابان‌ها) از GeoDataFrame به گراف NetworkX منتقل می‌کند. هر نود با شناسه منحصر به فرد خود و تمام ویژگی‌هایش (مثل موقعیت جغرافیایی، تعداد خیابان‌های متصل، و غیره) به گراف اضافه می‌شود. این کار گراف را کامل می‌کند چون قبلاً یال‌ها (خیابان‌ها) اضافه شده بودند و حالا نودها هم با تمام اطلاعات جغرافیایی‌شان به گراف اضافه می‌شوند.<p></p>
+<hr>
+<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="n">G</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="s1">'crs'</span><span class="p">]</span> <span class="o">=</span> <span class="n">osm_segments</span><span class="o">.</span><span class="n">crs</span>
+</span></code></pre></div>
+این تکنیک مفید است زمانی که داده‌های جغرافیایی را در گراف نگهداری می‌کنید و می‌خواهید اطمینان حاصل کنید که CRS داده‌های جغرافیایی گراف با CRS داده‌های اصلی همخوانی دارد.<p></p>
+<hr>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-71-1"><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'amenity'</span><span class="p">:</span> <span class="s1">'fire_station'</span><span class="p">}</span>
+</span><span id="__span-71-2"><a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a><span class="n">fire_stations</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">features_from_bbox</span><span class="p">(</span><span class="n">BBOX</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+</span><span id="__span-71-3"><a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a><span class="n">fire_stations</span> <span class="o">=</span> <span class="n">fire_stations</span><span class="p">[</span><span class="n">fire_stations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'Point'</span><span class="p">]</span>
+</span><span id="__span-71-4"><a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a><span class="nb">len</span><span class="p">(</span><span class="n">fire_stations</span><span class="p">)</span>
+</span></code></pre></div>
+<p>شرح کد:</p>
+<p>تعریف تگ‌ها برای جستجو:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-72-1"><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'amenity'</span><span class="p">:</span> <span class="s1">'fire_station'</span><span class="p">}</span>
+</span></code></pre></div>
+<p>این خط یک دیکشنری به نام tags ایجاد می‌کند که برای جستجوی ایستگاه‌های آتش‌نشانی از آن استفاده می‌شود. amenity با مقدار fire_station به معنی ایستگاه‌های آتش‌نشانی است.</p>
+<p>استخراج داده‌ها با استفاده از OSMnx:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-73-1"><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="n">fire_stations</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">features_from_bbox</span><span class="p">(</span><span class="n">BBOX</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+</span></code></pre></div>
+<p>این خط از تابع features_from_bbox در کتابخانه OSMnX استفاده می‌کند تا داده‌های ایستگاه‌های آتش‌نشانی را بر اساس یک Bounding Box (BBOX) استخراج کند. tags هم برای فیلتر کردن ایستگاه‌های آتش‌نشانی استفاده می‌شود.</p>
+<p>فیلتر کردن نقاط:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-74-1"><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a><span class="n">fire_stations</span> <span class="o">=</span> <span class="n">fire_stations</span><span class="p">[</span><span class="n">fire_stations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'Point'</span><span class="p">]</span>
+</span></code></pre></div>
+<p>این خط از داده‌های جغرافیایی (GeoDataFrame) فقط نقاط (که نوع هندسه آن‌ها Point است) را فیلتر می‌کند. این کار با استفاده از فیلتر کردن داده‌ها بر اساس نوع هندسه انجام می‌شود.</p>
+<p>شمارش تعداد ایستگاه‌های آتش‌نشانی:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-75-1"><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="nb">len</span><span class="p">(</span><span class="n">fire_stations</span><span class="p">)</span>
+</span></code></pre></div>
+<p>این خط تعداد ایستگاه‌های آتش‌نشانی موجود در داده‌های فیلتر شده را محاسبه می‌کند و تعداد نقاطی که به عنوان ایستگاه‌های آتش‌نشانی شناسایی شده‌اند را برمی‌گرداند.</p>
+<hr>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-76-1"><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="n">fire_stations</span><span class="p">[</span><span class="s1">'nearest_node'</span><span class="p">]</span> <span class="o">=</span> <span class="n">fire_stations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+</span><span id="__span-76-2"><a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>    <span class="k">lambda</span> <span class="n">geom</span><span class="p">:</span> <span class="n">ox</span><span class="o">.</span><span class="n">nearest_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</span><span id="__span-76-3"><a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>شرح کد:</p>
+<p>تعریف تابع lambda:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-77-1"><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="k">lambda</span> <span class="n">geom</span><span class="p">:</span> <span class="n">ox</span><span class="o">.</span><span class="n">nearest_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</span></code></pre></div>
+<p>در این خط از یک تابع lambda برای اعمال تابع nearest_nodes به هندسه‌های ایستگاه‌های آتش‌نشانی استفاده می‌شود.</p>
+<p>تابع nearest_nodes از کتابخانه OSMnX استفاده می‌کند تا نزدیک‌ترین نود (گره) به مختصات (طول و عرض جغرافیایی) ایستگاه‌های آتش‌نشانی را پیدا کند.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-78-1"><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">fire_stations</span><span class="p">[</span><span class="s1">'nearest_node'</span><span class="p">]</span> <span class="o">=</span> <span class="n">fire_stations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+</span><span id="__span-78-2"><a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a>    <span class="k">lambda</span> <span class="n">geom</span><span class="p">:</span> <span class="n">ox</span><span class="o">.</span><span class="n">nearest_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">geom</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</span><span id="__span-78-3"><a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>در این خط، از apply() برای اعمال تابع lambda به هر هندسه از ایستگاه‌های آتش‌نشانی استفاده می‌شود. به این ترتیب، برای هر ایستگاه آتش‌نشانی، نزدیک‌ترین نود جاده‌ای در گراف G پیدا می‌شود.</p>
+<p>نتیجه این عمل به ستون جدید nearest_node در fire_stations اضافه می‌شود.</p>
+<hr>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-79-1"><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="n">cutoff</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="mi">60</span>  <span class="c1"># 10 دقیقه</span>
+</span><span id="__span-79-2"><a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a><span class="n">service_time1</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-79-3"><a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a><span class="n">service_time2</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-79-4"><a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a>
+</span><span id="__span-79-5"><a id="__codelineno-79-5" name="__codelineno-79-5" href="#__codelineno-79-5"></a><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">fs</span> <span class="ow">in</span> <span class="n">fire_stations</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span><span id="__span-79-6"><a id="__codelineno-79-6" name="__codelineno-79-6" href="#__codelineno-79-6"></a>    <span class="n">nearest_node</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="s1">'nearest_node'</span><span class="p">]</span>
+</span><span id="__span-79-7"><a id="__codelineno-79-7" name="__codelineno-79-7" href="#__codelineno-79-7"></a>
+</span><span id="__span-79-8"><a id="__codelineno-79-8" name="__codelineno-79-8" href="#__codelineno-79-8"></a>    <span class="c1"># محاسبه زمان سرویس برای دو زمان مختلف</span>
+</span><span id="__span-79-9"><a id="__codelineno-79-9" name="__codelineno-79-9" href="#__codelineno-79-9"></a>    <span class="n">sa_time1</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">single_source_dijkstra_path_length</span><span class="p">(</span>
+</span><span id="__span-79-10"><a id="__codelineno-79-10" name="__codelineno-79-10" href="#__codelineno-79-10"></a>        <span class="n">G</span><span class="p">,</span> <span class="n">nearest_node</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">time1</span>
+</span><span id="__span-79-11"><a id="__codelineno-79-11" name="__codelineno-79-11" href="#__codelineno-79-11"></a>    <span class="p">)</span>
+</span><span id="__span-79-12"><a id="__codelineno-79-12" name="__codelineno-79-12" href="#__codelineno-79-12"></a>    <span class="n">sa_time2</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">single_source_dijkstra_path_length</span><span class="p">(</span>
+</span><span id="__span-79-13"><a id="__codelineno-79-13" name="__codelineno-79-13" href="#__codelineno-79-13"></a>        <span class="n">G</span><span class="p">,</span> <span class="n">nearest_node</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">time2</span>
+</span><span id="__span-79-14"><a id="__codelineno-79-14" name="__codelineno-79-14" href="#__codelineno-79-14"></a>    <span class="p">)</span>
+</span><span id="__span-79-15"><a id="__codelineno-79-15" name="__codelineno-79-15" href="#__codelineno-79-15"></a>
+</span><span id="__span-79-16"><a id="__codelineno-79-16" name="__codelineno-79-16" href="#__codelineno-79-16"></a>    <span class="c1"># ساخت زیرگراف برای هر زمان</span>
+</span><span id="__span-79-17"><a id="__codelineno-79-17" name="__codelineno-79-17" href="#__codelineno-79-17"></a>    <span class="n">subgraph_time1</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">sa_time1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-79-18"><a id="__codelineno-79-18" name="__codelineno-79-18" href="#__codelineno-79-18"></a>    <span class="n">subgraph_time2</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">sa_time2</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-79-19"><a id="__codelineno-79-19" name="__codelineno-79-19" href="#__codelineno-79-19"></a>
+</span><span id="__span-79-20"><a id="__codelineno-79-20" name="__codelineno-79-20" href="#__codelineno-79-20"></a>    <span class="c1"># ذخیره زیرگراف‌ها</span>
+</span><span id="__span-79-21"><a id="__codelineno-79-21" name="__codelineno-79-21" href="#__codelineno-79-21"></a>    <span class="n">service_time1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subgraph_time1</span><span class="p">)</span>
+</span><span id="__span-79-22"><a id="__codelineno-79-22" name="__codelineno-79-22" href="#__codelineno-79-22"></a>    <span class="n">service_time2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subgraph_time2</span><span class="p">)</span>
+</span></code></pre></div>
+<hr>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-80-1"><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-80-2"><a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+</span><span id="__span-80-3"><a id="__codelineno-80-3" name="__codelineno-80-3" href="#__codelineno-80-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">osmnx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ox</span>
+</span><span id="__span-80-4"><a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a>
+</span><span id="__span-80-5"><a id="__codelineno-80-5" name="__codelineno-80-5" href="#__codelineno-80-5"></a><span class="c1"># رسم گراف اصلی</span>
+</span><span id="__span-80-6"><a id="__codelineno-80-6" name="__codelineno-80-6" href="#__codelineno-80-6"></a><span class="n">fix</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+</span><span id="__span-80-7"><a id="__codelineno-80-7" name="__codelineno-80-7" href="#__codelineno-80-7"></a>    <span class="n">G</span><span class="p">,</span>
+</span><span id="__span-80-8"><a id="__codelineno-80-8" name="__codelineno-80-8" href="#__codelineno-80-8"></a>    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-80-9"><a id="__codelineno-80-9" name="__codelineno-80-9" href="#__codelineno-80-9"></a>    <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-80-10"><a id="__codelineno-80-10" name="__codelineno-80-10" href="#__codelineno-80-10"></a>    <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-80-11"><a id="__codelineno-80-11" name="__codelineno-80-11" href="#__codelineno-80-11"></a>    <span class="n">edge_color</span><span class="o">=</span><span class="s1">'lightgray'</span><span class="p">,</span>
+</span><span id="__span-80-12"><a id="__codelineno-80-12" name="__codelineno-80-12" href="#__codelineno-80-12"></a>    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span><span id="__span-80-13"><a id="__codelineno-80-13" name="__codelineno-80-13" href="#__codelineno-80-13"></a><span class="p">)</span>
+</span><span id="__span-80-14"><a id="__codelineno-80-14" name="__codelineno-80-14" href="#__codelineno-80-14"></a>
+</span><span id="__span-80-15"><a id="__codelineno-80-15" name="__codelineno-80-15" href="#__codelineno-80-15"></a><span class="c1"># تنظیم حدود نمایشی</span>
+</span><span id="__span-80-16"><a id="__codelineno-80-16" name="__codelineno-80-16" href="#__codelineno-80-16"></a><span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">=</span> <span class="n">BBOX</span>
+</span><span id="__span-80-17"><a id="__codelineno-80-17" name="__codelineno-80-17" href="#__codelineno-80-17"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">minx</span><span class="p">,</span> <span class="n">maxx</span><span class="p">])</span>
+</span><span id="__span-80-18"><a id="__codelineno-80-18" name="__codelineno-80-18" href="#__codelineno-80-18"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">miny</span><span class="p">,</span> <span class="n">maxy</span><span class="p">])</span>
+</span><span id="__span-80-19"><a id="__codelineno-80-19" name="__codelineno-80-19" href="#__codelineno-80-19"></a>
+</span><span id="__span-80-20"><a id="__codelineno-80-20" name="__codelineno-80-20" href="#__codelineno-80-20"></a><span class="c1"># رسم مسیرهای سرویس‌دهی زمان 1 به رنگ قرمز</span>
+</span><span id="__span-80-21"><a id="__codelineno-80-21" name="__codelineno-80-21" href="#__codelineno-80-21"></a><span class="k">for</span> <span class="n">sa</span> <span class="ow">in</span> <span class="n">service_time1</span><span class="p">:</span>
+</span><span id="__span-80-22"><a id="__codelineno-80-22" name="__codelineno-80-22" href="#__codelineno-80-22"></a>    <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">sa</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-80-23"><a id="__codelineno-80-23" name="__codelineno-80-23" href="#__codelineno-80-23"></a>
+</span><span id="__span-80-24"><a id="__codelineno-80-24" name="__codelineno-80-24" href="#__codelineno-80-24"></a><span class="c1"># رسم مسیرهای سرویس‌دهی زمان 2 به رنگ آبی</span>
+</span><span id="__span-80-25"><a id="__codelineno-80-25" name="__codelineno-80-25" href="#__codelineno-80-25"></a><span class="k">for</span> <span class="n">sa</span> <span class="ow">in</span> <span class="n">service_time2</span><span class="p">:</span>
+</span><span id="__span-80-26"><a id="__codelineno-80-26" name="__codelineno-80-26" href="#__codelineno-80-26"></a>    <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span><span class="n">sa</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edge_linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-80-27"><a id="__codelineno-80-27" name="__codelineno-80-27" href="#__codelineno-80-27"></a>
+</span><span id="__span-80-28"><a id="__codelineno-80-28" name="__codelineno-80-28" href="#__codelineno-80-28"></a><span class="c1"># رسم ایستگاه‌های آتش‌نشانی</span>
+</span><span id="__span-80-29"><a id="__codelineno-80-29" name="__codelineno-80-29" href="#__codelineno-80-29"></a><span class="n">fire_stations</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'green'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</span><span id="__span-80-30"><a id="__codelineno-80-30" name="__codelineno-80-30" href="#__codelineno-80-30"></a>
+</span><span id="__span-80-31"><a id="__codelineno-80-31" name="__codelineno-80-31" href="#__codelineno-80-31"></a><span class="c1"># اضافه کردن عنوان</span>
+</span><span id="__span-80-32"><a id="__codelineno-80-32" name="__codelineno-80-32" href="#__codelineno-80-32"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Fire stations Service areas in Time 1 (red), Time 2(blue)'</span><span class="p">)</span>
+</span><span id="__span-80-33"><a id="__codelineno-80-33" name="__codelineno-80-33" href="#__codelineno-80-33"></a>
+</span><span id="__span-80-34"><a id="__codelineno-80-34" name="__codelineno-80-34" href="#__codelineno-80-34"></a><span class="c1"># نمایش گراف</span>
+</span><span id="__span-80-35"><a id="__codelineno-80-35" name="__codelineno-80-35" href="#__codelineno-80-35"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+  <aside class="md-source-file">
+    
+    
+    
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="مشارکت کنندگان">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/Fatemebookanian" class="md-author" title="@Fatemebookanian">
+          
+          <img src="https://avatars.githubusercontent.com/u/108584390?v=4&amp;size=72" alt="Fatemebookanian">
+        </a>
+      
+        <a href="https://github.com/web-flow" class="md-author" title="@web-flow">
+          
+          <img src="https://avatars.githubusercontent.com/u/19864447?v=4&amp;size=72" alt="web-flow">
+        </a>
+      
+        <a href="https://github.com/alitayebi" class="md-author" title="@alitayebi">
+          
+          <img src="https://avatars.githubusercontent.com/u/42505961?v=4&amp;size=72" alt="alitayebi">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی">
+        
+          
+          <a href="../session5/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: جلسه ۵ - تحلیل شبکه و دسترسی">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                قبلی
+              </span>
+              <div class="md-ellipsis">
+                جلسه ۵ - تحلیل شبکه و دسترسی
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../session7/" class="md-footer__link md-footer__link--next" aria-label="بعدی: جلسه ۷ - داده‌های سنجش از دور">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                بعدی
+              </span>
+              <div class="md-ellipsis">
+                جلسه ۷ - داده‌های سنجش از دور
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 GIS Hacks
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/gishacks" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/gishacks" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

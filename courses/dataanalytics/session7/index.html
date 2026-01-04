@@ -1,0 +1,5003 @@
+<!DOCTYPE html><html lang="fa" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../session6/">
+      
+      
+        <link rel="next" href="../session8/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>جلسه ۷ - داده‌های سنجش از دور - ترفندهای GIS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Vazirmatn";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#google-earth-engine-vscode" class="md-skip">
+          پرش به محتویات
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href="../../.." title="ترفندهای GIS" class="md-header__button md-logo" aria-label="ترفندهای GIS" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ترفندهای GIS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              جلسه ۷ - داده‌های سنجش از دور
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="جستجو">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            راه‌اندازی جستجو
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gishacks/gishacks.github.io" title="رفتن به مخزن" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    gishacks/main
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  صفحه نخست
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../hacks/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ترفندها
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  دوره‌های آموزشی
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  درباره
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../contact/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  تماس
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  بایگانی
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="هدایت" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ترفندهای GIS" class="md-nav__button md-logo" aria-label="ترفندهای GIS" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    ترفندهای GIS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gishacks/gishacks.github.io" title="رفتن به مخزن" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    gishacks/main
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    صفحه نخست
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../hacks/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ترفندها
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ترفندها
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/basemaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    افزودن نقشه پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/heatmaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نقشه حرارتی زمان‌مند
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/watershed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    تحلیل حوزه آب‌خیز
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hacks/landcover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نقشه پوشش زمین
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    دوره‌های آموزشی
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    دوره‌های آموزشی
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../global-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    کار با داده‌های جهانی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    آشنایی با GIS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    آشنایی با GIS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱-مفاهیم GIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲-آشنایی با داده‌ها و نرم‌افزار
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳-نمایش داده‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴-قاب‌بندی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵-گزارش آماری جداول
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۶-انتخاب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۷-تحلیل موقعیت لایه‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۸-تحلیل مطلوبیت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۹-تحلیل فضایی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۰-تحلیل شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۱-ساخت لایه GIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gis101/session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۲-ساخت نقشه آنلاین
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GIS پیشرفته
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GIS پیشرفته
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱ - معرفی و برنامه‌ریزی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳ - تحلیل فضایی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲ - تحلیل سطح
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴ - تحلیل هیدرولوژیک
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵ - ایجاد داده شبکه‌ای
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۶ - تحلیل دسترسی شبکه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۷ - مسیریابی و مبدا-مقصد
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۸ - تحلیل کسب‌وکار
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۹ - آمار فضایی پایه
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۰ - رگرسیون فضایی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۱ - تحلیل الگوی آماری
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۲ - مقدمه WebGIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۳ - مبانی طراحی وب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۴ - Leaflet بخش ۱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۵ - Leaflet بخش ۲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advgis/session16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۶ - توسعه WebGIS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ورود به دنیای برنامه‌نویسی پایتون در GIS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ورود به دنیای برنامه‌نویسی پایتون در GIS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱-مبانی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲-وکتور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳-رستر
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴-آمار
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pygis101/session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵-وب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    تحلیل داده‌های شهری
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    تحلیل داده‌های شهری
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    معرفی دوره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱ - آشنایی داده‌های شهری
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۲ - پاکسازی داده‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۳ - تحلیل جمعیت و تجمیع
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۴ - پیاده‌سازی مدل 2SFCA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۵ - تحلیل شبکه و دسترسی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۶ - مصورسازی حرکت
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۷ - داده‌های سنجش از دور
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۷ - داده‌های سنجش از دور
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱. پیش‌نیازها و تنظیمات اینترنت
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۱. پیش‌نیازها و تنظیمات اینترنت">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۱ چرا نیاز به تنظیمات خاص اینترنت داریم؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۲ راه‌حل: استفاده از شبکه خصوصی مجازی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۳ مشکل رایج: فیلترشکن‌های معمولی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۴ راه‌حل پیشرفته: فعال‌سازی حالت TUN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tun_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۵ نحوه فعال‌سازی حالت TUN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲. نصب کتابخانه‌های پایتون
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۲. نصب کتابخانه‌های پایتون">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲.۱ مفهوم کتابخانه در پایتون
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲.۲ کتابخانه‌های مورد نیاز
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲.۳ دستور نصب
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳. احراز هویت و اتصال به سرورهای گوگل
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۳. احراز هویت و اتصال به سرورهای گوگل">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۱ مفهوم احراز هویت
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۲ چرا گوگل احراز هویت را الزامی کرده است؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۳ کد احراز هویت
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۴ توضیح خط‌به‌خط کد
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#google-earth-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۵ فرآیند ثبت‌نام در Google Earth Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴. ساخت نقشه و تعیین محدوده مطالعه
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۴. ساخت نقشه و تعیین محدوده مطالعه">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۱ چرا نیاز به نقشه داریم؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۲ کد ایجاد نقشه پایه
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۳ توضیح پارامترها
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۴ تعریف محدوده مستطیلی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounding-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۵ توضیح Bounding Box
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۶ نمایش نقشه
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵. دریافت و فیلتر تصاویر ماهواره‌ای
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۵. دریافت و فیلتر تصاویر ماهواره‌ای">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentinel-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۱ معرفی ماهواره Sentinel-2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۲ مشکل حجم داده
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۳ سه فیلتر اصلی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۴ کد فراخوانی و فیلتر تصاویر
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۵ توضیح خط‌به‌خط
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۶ انتخاب باندهای مورد نیاز
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۷ مفهوم باند طیفی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۸ معرفی چهار باند انتخابی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۹ محاسبه تصویر ترکیبی (Composite)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#median" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۱۰ توضیح تابع median
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۱۱ تابع clip
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶. نمایش تصویر با رنگ طبیعی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۶. نمایش تصویر با رنگ طبیعی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶.۱ مفهوم رنگ طبیعی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶.۲ کد نمایش
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶.۳ توضیح پارامترها
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷. محاسبه شاخص پوشش گیاهی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۷. محاسبه شاخص پوشش گیاهی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndvi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۱ معرفی شاخص NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۲ فلسفه NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۳ فرمول NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۴ تفسیر مقادیر NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۵ کد محاسبه NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizeddifference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۶ توضیح تابع normalizedDifference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۷ کد نمایش NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۸ توضیح پالت رنگی
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸. ذخیره‌سازی تصویر نهایی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۸. ذخیره‌سازی تصویر نهایی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۱ چرا نیاز به دانلود داریم؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۲ کد کامل Export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۳ توضیح خط‌به‌خط
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۴ پارامترهای تابع export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۵ خطای رایج: حجم بیش از حد
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۹. کد کامل پروژه
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰. منابع داده اضافی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۱۰. منابع داده اضافی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#landsat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۱ تصاویر ماهواره Landsat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sentinel-5p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۲ داده‌های آلودگی هوا (Sentinel-5P)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۳ دمای سطح زمین (MODIS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viirs-nighttime-lights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۴ نور شب (VIIRS Nighttime Lights)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۵ داده‌های جمعیتی
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۸ - پایش محیط زیست
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۹ - تشخیص تغییرات و گسترش
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۰ - بازار مسکن و شاخص‌ها
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۱ - داده‌های جرم و خدمات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۲ - تحلیل سیاست و اخلاق
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۳ - داده‌های متنی و شبکه اجتماعی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۴ - مدل‌سازی و شبیه‌سازی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    جلسه ۱۵ - مصورسازی پیشرفته
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    درباره
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    تماس
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    بایگانی
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱. پیش‌نیازها و تنظیمات اینترنت
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۱. پیش‌نیازها و تنظیمات اینترنت">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۱ چرا نیاز به تنظیمات خاص اینترنت داریم؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۲ راه‌حل: استفاده از شبکه خصوصی مجازی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۳ مشکل رایج: فیلترشکن‌های معمولی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۴ راه‌حل پیشرفته: فعال‌سازی حالت TUN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tun_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱.۵ نحوه فعال‌سازی حالت TUN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲. نصب کتابخانه‌های پایتون
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۲. نصب کتابخانه‌های پایتون">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲.۱ مفهوم کتابخانه در پایتون
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲.۲ کتابخانه‌های مورد نیاز
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۲.۳ دستور نصب
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳. احراز هویت و اتصال به سرورهای گوگل
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۳. احراز هویت و اتصال به سرورهای گوگل">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۱ مفهوم احراز هویت
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۲ چرا گوگل احراز هویت را الزامی کرده است؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۳ کد احراز هویت
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۴ توضیح خط‌به‌خط کد
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#google-earth-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۳.۵ فرآیند ثبت‌نام در Google Earth Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴. ساخت نقشه و تعیین محدوده مطالعه
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۴. ساخت نقشه و تعیین محدوده مطالعه">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۱ چرا نیاز به نقشه داریم؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۲ کد ایجاد نقشه پایه
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۳ توضیح پارامترها
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۴ تعریف محدوده مستطیلی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounding-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۵ توضیح Bounding Box
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۴.۶ نمایش نقشه
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵. دریافت و فیلتر تصاویر ماهواره‌ای
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۵. دریافت و فیلتر تصاویر ماهواره‌ای">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentinel-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۱ معرفی ماهواره Sentinel-2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۲ مشکل حجم داده
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۳ سه فیلتر اصلی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۴ کد فراخوانی و فیلتر تصاویر
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۵ توضیح خط‌به‌خط
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۶ انتخاب باندهای مورد نیاز
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۷ مفهوم باند طیفی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۸ معرفی چهار باند انتخابی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۹ محاسبه تصویر ترکیبی (Composite)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#median" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۱۰ توضیح تابع median
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۵.۱۱ تابع clip
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶. نمایش تصویر با رنگ طبیعی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۶. نمایش تصویر با رنگ طبیعی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶.۱ مفهوم رنگ طبیعی
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶.۲ کد نمایش
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۶.۳ توضیح پارامترها
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷. محاسبه شاخص پوشش گیاهی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۷. محاسبه شاخص پوشش گیاهی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndvi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۱ معرفی شاخص NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۲ فلسفه NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۳ فرمول NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۴ تفسیر مقادیر NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۵ کد محاسبه NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizeddifference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۶ توضیح تابع normalizedDifference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndvi_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۷ کد نمایش NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۷.۸ توضیح پالت رنگی
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸. ذخیره‌سازی تصویر نهایی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۸. ذخیره‌سازی تصویر نهایی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۱ چرا نیاز به دانلود داریم؟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۲ کد کامل Export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۳ توضیح خط‌به‌خط
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۴ پارامترهای تابع export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۸.۵ خطای رایج: حجم بیش از حد
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۹. کد کامل پروژه
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰. منابع داده اضافی
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="۱۰. منابع داده اضافی">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#landsat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۱ تصاویر ماهواره Landsat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sentinel-5p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۲ داده‌های آلودگی هوا (Sentinel-5P)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۳ دمای سطح زمین (MODIS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viirs-nighttime-lights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۴ نور شب (VIIRS Nighttime Lights)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ۱۰.۵ داده‌های جمعیتی
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/gishacks/gishacks.github.io/edit/main/docs/courses/dataanalytics/session7.md" title="این صفحه را ویرایش کنید" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/gishacks/gishacks.github.io/raw/main/docs/courses/dataanalytics/session7.md" title="محتویات این صفحه را نشان بده" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<h1 id="google-earth-engine-vscode">راهنمای جامع کار با Google Earth Engine در VSCode<a class="headerlink" href="#google-earth-engine-vscode" title="Permanent link">¶</a></h1>
+<p>این گزارش شامل تمام مراحل کار با گوگل ارث انجین از صفر تا دانلود تصاویر ماهواره‌ای و محاسبه شاخص‌های گیاهی است. تمام مراحل به زبان ساده و با مثال‌های کاربردی توضیح داده شده است.</p>
+<h2 id="_1">۱. پیش‌نیازها و تنظیمات اینترنت<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<h3 id="_2">۱.۱ چرا نیاز به تنظیمات خاص اینترنت داریم؟<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<p>زمانی که شما می‌خواهید از سرورهای گوگل استفاده کنید، درخواست‌های شما باید از شبکه داخلی خارج شده و به سرورهای بین‌المللی گوگل برسد. اما به دلیل تحریم‌های اقتصادی، اپراتورهای اینترنت در ایران (مانند مخابرات، ایرانسل و سایر ارائه‌دهندگان) این ارتباط را مسدود می‌کنند.[<sup>1][</sup>2][^3]</p>
+<h3 id="_3">۱.۲ راه‌حل: استفاده از شبکه خصوصی مجازی<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<p>شبکه خصوصی مجازی (VPN - Virtual Private Network) مانند یک تونل رمزگذاری شده عمل می‌کند که شما را از داخل ایران به یک سرور واسط در کشور دیگری (مثل آلمان، هلند یا سنگاپور) منتقل می‌کند و از آنجا به سرورهای گوگل متصل می‌شوید.[<sup>2][</sup>3]</p>
+<h3 id="_4">۱.۳ مشکل رایج: فیلترشکن‌های معمولی<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
+<p>بسیاری از فیلترشکن‌ها فقط ترافیک مرورگر وب (Browser) شما را از تونل عبور می‌دهند. اما برنامه‌های دیگر مثل پایتون، VSCode و ترمینال همچنان به صورت مستقیم به اینترنت داخلی متصل می‌شوند و در نتیجه به سرورهای گوگل دسترسی پیدا نمی‌کنند.[^2]</p>
+<h3 id="tun">۱.۴ راه‌حل پیشرفته: فعال‌سازی حالت TUN<a class="headerlink" href="#tun" title="Permanent link">¶</a></h3>
+<p>حالت TUN (یا TAP) یک حالت خاص در نرم‌افزارهای VPN است که یک <strong>آداپتور شبکه مجازی</strong> روی سیستم عامل شما ایجاد می‌کند. این آداپتور دقیقاً مانند یک کارت شبکه فیزیکی عمل می‌کند، با این تفاوت که تمام ترافیک شبکه سیستم (شامل تمام برنامه‌ها) را از داخل تونل VPN عبور می‌دهد.</p>
+<p><strong>تفاوت عملکرد:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">حالت</th>
+<th style="text-align: left;">مرورگر</th>
+<th style="text-align: left;">پایتون</th>
+<th style="text-align: left;">VSCode</th>
+<th style="text-align: left;">ترمینال</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">بدون TUN</td>
+<td style="text-align: left;">✅ متصل</td>
+<td style="text-align: left;">❌ مسدود</td>
+<td style="text-align: left;">❌ مسدود</td>
+<td style="text-align: left;">❌ مسدود</td>
+</tr>
+<tr>
+<td style="text-align: left;">با TUN</td>
+<td style="text-align: left;">✅ متصل</td>
+<td style="text-align: left;">✅ متصل</td>
+<td style="text-align: left;">✅ متصل</td>
+<td style="text-align: left;">✅ متصل</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tun_1">۱.۵ نحوه فعال‌سازی حالت TUN<a class="headerlink" href="#tun_1" title="Permanent link">¶</a></h3>
+<p><strong>برای نرم‌افزار v2rayN:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Settings → Core Settings → Enable TUN Mode
+</span></code></pre></div>
+<p><strong>نکته امنیتی:</strong> برای فعال‌سازی TUN Mode، نرم‌افزار VPN باید با دسترسی Administrator (در ویندوز) یا root (در لینوکس) اجرا شود.</p>
+<p><strong>هشدار:</strong> پس از فعال‌سازی TUN، ممکن است برخی برنامه‌های داخلی (مثل بانک‌ها) به دلیل شناسایی IP خارجی به درستی کار نکنند. در این صورت موقتاً TUN را غیرفعال کنید.</p>
+<hr>
+<h2 id="_5">۲. نصب کتابخانه‌های پایتون<a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
+<h3 id="_6">۲.۱ مفهوم کتابخانه در پایتون<a class="headerlink" href="#_6" title="Permanent link">¶</a></h3>
+<p>کتابخانه (Package یا Library) در پایتون، یک بسته نرم‌افزاری آماده است که توسط برنامه‌نویسان دیگر نوشته شده و به صورت رایگان در دسترس قرار گرفته است. استفاده از کتابخانه‌ها به این معناست که شما نیازی به نوشتن هزاران خط کد از ابتدا ندارید و می‌توانید از کدهای از پیش آزمایش شده استفاده کنید.[<sup>4][</sup>5][^1]</p>
+<h3 id="_7">۲.۲ کتابخانه‌های مورد نیاز<a class="headerlink" href="#_7" title="Permanent link">¶</a></h3>
+<p><strong>کتابخانه اول: earthengine-api</strong></p>
+<p>این کتابخانه شامل تمام توابع و کلاس‌های لازم برای برقراری ارتباط با سرورهای Google Earth Engine است. این کتابخانه مانند یک مترجم عمل می‌کند که دستورات پایتون شما را به زبان API گوگل ترجمه کرده و به سرور ارسال می‌کند.[<sup>6][</sup>7][^1]</p>
+<p><strong>کتابخانه دوم: geemap</strong></p>
+<p>این کتابخانه ابزارهای بصری برای نمایش نقشه‌های تعاملی و تصاویر ماهواره‌ای در محیط پایتون فراهم می‌کند. بدون این کتابخانه، شما فقط می‌توانید محاسبات را انجام دهید اما نتیجه را نمی‌توانید به صورت نقشه ببینید.[<sup>5][</sup>8][^4]</p>
+<h3 id="_8">۲.۳ دستور نصب<a class="headerlink" href="#_8" title="Permanent link">¶</a></h3>
+<p>دستور زیر را <strong>یک‌بار</strong> در ترمینال یا Command Prompt اجرا کنید:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>earthengine-api<span class="w"> </span>geemap
+</span></code></pre></div>
+<p><strong>نکته مهم:</strong> این دستور را در ترمینال سیستم‌عامل اجرا کنید، نه داخل فایل کد پایتون. اگر از محیط مجازی (Virtual Environment) استفاده می‌کنید، ابتدا آن را فعال کنید.</p>
+<p><strong>راه‌های اجرای ترمینال:</strong></p>
+<ul>
+<li><strong>ویندوز:</strong> کلیدهای <code>Win + R</code> را بزنید، <code>cmd</code> تایپ کنید و Enter بزنید</li>
+<li><strong>لینوکس/مک:</strong> برنامه Terminal را باز کنید</li>
+<li><strong>VSCode:</strong> از منوی <code>Terminal → New Terminal</code> استفاده کنید</li>
+</ul>
+<hr>
+<h2 id="_9">۳. احراز هویت و اتصال به سرورهای گوگل<a class="headerlink" href="#_9" title="Permanent link">¶</a></h2>
+<h3 id="_10">۳.۱ مفهوم احراز هویت<a class="headerlink" href="#_10" title="Permanent link">¶</a></h3>
+<p>احراز هویت (Authentication) فرآیندی است که در آن شما به سرور گوگل ثابت می‌کنید که چه کسی هستید و مجوز استفاده از سرویس‌های Earth Engine را دارید. این مشابه وارد شدن با رمز عبور به سیستم ایمیل یا شبکه‌های اجتماعی است.[<sup>7][</sup>1][^6]</p>
+<h3 id="_11">۳.۲ چرا گوگل احراز هویت را الزامی کرده است؟<a class="headerlink" href="#_11" title="Permanent link">¶</a></h3>
+<p>سرورهای Google Earth Engine دارای قدرت پردازشی بسیار بالایی هستند و پتابایت‌ها داده ماهواره‌ای را ذخیره کرده‌اند. اگر هر کسی بدون شناسایی بتواند استفاده کند، منابع سرور به سرعت اشباع می‌شود. بنابراین گوگل نیاز دارد بداند:[<sup>9][</sup>10]</p>
+<ul>
+<li>چه کسی از سرویس استفاده می‌کند</li>
+<li>چقدر منابع مصرف می‌کند</li>
+<li>آیا استفاده تجاری است یا تحقیقاتی</li>
+</ul>
+<h3 id="_12">۳.۳ کد احراز هویت<a class="headerlink" href="#_12" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ee</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">geemap</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># احراز هویت (فقط بار اول)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># اتصال به پروژه</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'نام_پروژه_شما'</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="_13">۳.۴ توضیح خط‌به‌خط کد<a class="headerlink" href="#_13" title="Permanent link">¶</a></h3>
+<p><strong>خط اول: <code>import ee</code></strong></p>
+<p>کتابخانه Earth Engine API را وارد برنامه می‌کند.[<sup>1][</sup>6]</p>
+<p><strong>خط دوم: <code>import geemap</code></strong></p>
+<p>کتابخانه نمایش نقشه را وارد برنامه می‌کند.[<sup>8][</sup>4][^5]</p>
+<p><strong>خط پنجم: <code>ee.Authenticate()</code></strong></p>
+<p>این دستور یک پنجره مرورگر باز می‌کند و فرآیند احراز هویت را شروع می‌کند. این کار <strong>فقط یک‌بار در هر سیستم</strong> لازم است. پس از انجام موفقیت‌آمیز، اطلاعات احراز هویت در سیستم ذخیره می‌شود و دیگر نیازی به تکرار نیست.[<sup>6][</sup>7][^1]</p>
+<p><strong>نکته:</strong> در کدهای بعدی این خط را کامنت می‌کنیم (با <code>#</code> در ابتدای خط) چون دیگر نیازی به اجرای مجدد نیست.</p>
+<p><strong>خط هشتم: <code>ee.Initialize(project='...')</code></strong></p>
+<p>پس از احراز هویت موفق، باید به پایتون بگویید که به کدام پروژه Cloud متصل شوید. پروژه مانند یک فضای کاری مجزا است که تمام محاسبات و داده‌های شما در آن ذخیره می‌شود.[<sup>10][</sup>9]</p>
+<h3 id="google-earth-engine">۳.۵ فرآیند ثبت‌نام در Google Earth Engine<a class="headerlink" href="#google-earth-engine" title="Permanent link">¶</a></h3>
+<p><strong>گام اول: اجرای دستور Authenticate</strong></p>
+<p>دستور <code>ee.Authenticate()</code> را در کد پایتون اجرا کنید. یک پنجره مرورگر باز می‌شود و شما را به صفحه ورود گوگل هدایت می‌کند.[<sup>7][</sup>1][^6]</p>
+<p><strong>گام دوم: ورود با حساب کاربری</strong></p>
+<p>با استفاده از حساب Gmail خود وارد شوید. بهتر است از همان حسابی استفاده کنید که برای Google Drive و سایر سرویس‌های گوگل استفاده می‌کنید.</p>
+<p><strong>گام سوم: ایجاد Cloud Project</strong></p>
+<p>گوگل از شما می‌پرسد: «آیا می‌خواهید یک Cloud Project ایجاد کنید؟». روی گزینه <strong>Create a new project</strong> کلیک کنید.[<sup>9][</sup>10]</p>
+<p><strong>پروژه ابری (Cloud Project) چیست؟</strong></p>
+<p>پروژه ابری مانند یک پوشه اختصاصی روی سرورهای گوگل است. تمام کارهای شما (تصاویر پردازش شده، نتایج محاسبات، فایل‌های خروجی) در این پروژه ذخیره می‌شوند. هر کاربر می‌تواند چندین پروژه داشته باشد و برای هر پروژه تحقیقاتی یک پروژه جداگانه بسازد.</p>
+<p><strong>گام چهارم: انتخاب نوع استفاده</strong></p>
+<p>گوگل سه نوع استفاده را تعریف کرده است:</p>
+<ul>
+<li><strong>Non-commercial:</strong> استفاده غیر تجاری (رایگان)</li>
+<li><strong>Academic:</strong> استفاده دانشگاهی و پژوهشی (رایگان)</li>
+<li><strong>Commercial:</strong> استفاده تجاری (پولی)</li>
+</ul>
+<p>برای کارهای تحقیقاتی و آموزشی، گزینه Non-commercial یا Academic را انتخاب کنید.[^10]</p>
+<p><strong>گام پنجم: تکمیل فرم اطلاعات</strong></p>
+<p>فرمی با فیلدهای زیر نمایش داده می‌شود:</p>
+<ul>
+<li><strong>هدف استفاده:</strong> Scientific Research (پژوهش علمی)</li>
+<li><strong>محدوده جغرافیایی:</strong> Global (جهانی)</li>
+<li><strong>وابستگی سازمانی:</strong> نام دانشگاه یا موسسه پژوهشی خود را وارد کنید</li>
+</ul>
+<p><strong>نکته امنیتی:</strong> از کلمات کامل و حساس مانند "Iran"، "Islamic" یا "Tehran" استفاده نکنید. بهتر است از اختصارات استفاده کنید (مثلاً: Tehran Univ → TehranU یا Iran Planning Org → IPO). این کار احتمال فیلتر شدن توسط سیستم‌های خودکار تحریم را کاهش می‌دهد.[<sup>3][</sup>2]</p>
+<p><strong>گام ششم: دریافت کد تایید</strong></p>
+<p>پس از ارسال فرم و تایید، یک کد طولانی (معمولاً شروع می‌شود با <code>4/0Aan...</code>) به شما نمایش داده می‌شود. این کد یک‌بار مصرف است و فقط برای احراز هویت این سیستم استفاده می‌شود.[<sup>1][</sup>6]</p>
+<p><strong>گام هفتم: وارد کردن کد در VSCode</strong></p>
+<p>کد را کپی کنید و در کادر ورودی که در <strong>بالای پنجره VSCode</strong> ظاهر شده، Paste کنید و Enter بزنید.</p>
+<p><strong>گام هشتم: تایید موفقیت</strong></p>
+<p>اگر پیام <strong>"Successfully authenticated"</strong> نمایش داده شد، یعنی احراز هویت با موفقیت انجام شده است.</p>
+<p>اگر ارور دریافت کردید، احتمالاً یکی از مشکلات زیر وجود دارد:</p>
+<ul>
+<li>فیلترشکن فعال نیست یا در حالت TUN نیست</li>
+<li>کد منقضی شده است (سریع‌تر عمل کنید)</li>
+<li>مشکل در اتصال اینترنت</li>
+</ul>
+<hr>
+<h2 id="_14">۴. ساخت نقشه و تعیین محدوده مطالعه<a class="headerlink" href="#_14" title="Permanent link">¶</a></h2>
+<h3 id="_15">۴.۱ چرا نیاز به نقشه داریم؟<a class="headerlink" href="#_15" title="Permanent link">¶</a></h3>
+<p>قبل از دانلود تصاویر ماهواره‌ای، نیاز داریم دو کار انجام دهیم:</p>
+<ol>
+<li>یک <strong>نقشه تعاملی</strong> بسازیم تا بتوانیم نتایج را بصری ببینیم</li>
+<li>یک <strong>محدوده جغرافیایی</strong> مشخص کنیم تا فقط تصاویر آن ناحیه را دریافت کنیم</li>
+</ol>
+<h3 id="_16">۴.۲ کد ایجاد نقشه پایه<a class="headerlink" href="#_16" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># ایجاد نقشه با مرکزیت تهران</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">Map</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mf">35.69</span><span class="p">,</span> <span class="mf">51.39</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="_17">۴.۳ توضیح پارامترها<a class="headerlink" href="#_17" title="Permanent link">¶</a></h3>
+<p><strong>پارامتر center:</strong></p>
+<p>مختصات جغرافیایی نقطه مرکز نقشه را مشخص می‌کند. فرمت آن به صورت <code>[Latitude, Longitude]</code> است.[<sup>4][</sup>5][^8]</p>
+<ul>
+<li>عدد اول (<code>35.69</code>): عرض جغرافیایی (Latitude) - فاصله از خط استوا</li>
+<li>عدد دوم (<code>51.39</code>): طول جغرافیایی (Longitude) - فاصله از نصف‌النهار مبدأ</li>
+</ul>
+<p><strong>نحوه پیدا کردن مختصات:</strong></p>
+<ol>
+<li>وارد Google Maps شوید</li>
+<li>روی نقطه مورد نظر راست‌کلیک کنید</li>
+<li>اولین عدد Latitude و دومین عدد Longitude است</li>
+</ol>
+<p><strong>پارامتر zoom:</strong></p>
+<p>سطح بزرگنمایی نقشه را تعیین می‌کند. مقدار آن بین ۱ تا ۲۰ است:</p>
+<ul>
+<li><strong>1-4:</strong> دید کلی از یک قاره یا کشور</li>
+<li><strong>8-12:</strong> دید شهر یا منطقه</li>
+<li><strong>15-20:</strong> دید خیابان یا ساختمان</li>
+</ul>
+<p><strong>مفهوم شیء (Object):</strong></p>
+<p>متغیر <code>Map</code> یک شیء است. شیء در برنامه‌نویسی مانند یک جعبه است که هم داده دارد (مثل مختصات مرکز) و هم ابزار (مثل توابع اضافه کردن لایه).[<sup>5][</sup>4]</p>
+<h3 id="_18">۴.۴ تعریف محدوده مستطیلی<a class="headerlink" href="#_18" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">tehran_bound</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="mf">51.0</span><span class="p">,</span> <span class="mf">35.5</span><span class="p">,</span> <span class="mf">51.6</span><span class="p">,</span> <span class="mf">35.9</span><span class="p">])</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">tehran_bound</span><span class="p">,</span> <span class="p">{</span><span class="s1">'color'</span><span class="p">:</span> <span class="s1">'red'</span><span class="p">},</span> <span class="s1">'Tehran Bound'</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="bounding-box">۴.۵ توضیح Bounding Box<a class="headerlink" href="#bounding-box" title="Permanent link">¶</a></h3>
+<p><strong>مفهوم Bounding Box:</strong></p>
+<p>صندوق محدودکننده (Bounding Box) یک مستطیل جغرافیایی است که محدوده مطالعه شما را مشخص می‌کند. این مستطیل با چهار نقطه تعریف می‌شود: گوشه جنوب غربی و گوشه شمال شرقی.[^1]</p>
+<p><strong>فرمت داده‌ها:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>[51.0,        35.5,         51.6,        35.9]
+</span></code></pre></div>
+<p><strong>چرا نیاز به محدوده داریم؟</strong></p>
+<p>اگر محدوده تعریف نکنیم، گوگل تصویر کل ایران یا حتی کل خاورمیانه را ارسال می‌کند که حجم آن ممکن است چندین گیگابایت باشد. با تعریف محدوده، فقط بخشی از تصویر که ما نیاز داریم برش داده شده و ارسال می‌شود.</p>
+<p><strong>تابع addLayer:</strong></p>
+<p>این تابع یک لایه جدید به نقشه اضافه می‌کند. پارامترهای آن:[<sup>8][</sup>4][^5]</p>
+<ul>
+<li>پارامتر اول: شیء جغرافیایی (اینجا مستطیل)</li>
+<li>پارامتر دوم: تنظیمات نمایش (اینجا رنگ قرمز)</li>
+<li>پارامتر سوم: نام لایه که در لیست لایه‌ها نمایش داده می‌شود</li>
+</ul>
+<p><strong>مفهوم لایه (Layer):</strong></p>
+<p>لایه مانند یک ورق کاغذ شفاف است که روی نقشه قرار می‌گیرد. شما می‌توانید چندین لایه روی هم بگذارید (مثلاً یک لایه جاده، یک لایه رودخانه، یک لایه محدوده شهر).</p>
+<h3 id="_19">۴.۶ نمایش نقشه<a class="headerlink" href="#_19" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">Map</span>
+</span></code></pre></div>
+<p>این دستور در محیط‌های Jupyter Notebook یا VSCode با افزونه مناسب، نقشه تعاملی را نمایش می‌دهد. شما می‌توانید با ماوس zoom کنید، جابجا شوید و لایه‌ها را روشن/خاموش کنید.[<sup>4][</sup>5][^8]</p>
+<hr>
+<h2 id="_20">۵. دریافت و فیلتر تصاویر ماهواره‌ای<a class="headerlink" href="#_20" title="Permanent link">¶</a></h2>
+<h3 id="sentinel-2">۵.۱ معرفی ماهواره Sentinel-2<a class="headerlink" href="#sentinel-2" title="Permanent link">¶</a></h3>
+<p>سنتینل-۲ (Sentinel-2) یک ماهواره اروپایی برای مشاهده زمین است که توسط آژانس فضایی اروپا (ESA) پرتاب شده است. این ماهواره هر ۵ روز یک‌بار از تمام سطح زمین تصویربرداری می‌کند و تصاویر آن به صورت رایگان در دسترس عموم قرار دارد.[<sup>11][</sup>12]</p>
+<p><strong>مشخصات فنی:</strong></p>
+<ul>
+<li>رزولوشن مکانی: ۱۰ متر (برای باندهای مرئی)</li>
+<li>دوره بازگشت: ۵ روز</li>
+<li>تعداد باندها: ۱۳ باند طیفی</li>
+<li>پوشش: کل سطح زمین</li>
+</ul>
+<h3 id="_21">۵.۲ مشکل حجم داده<a class="headerlink" href="#_21" title="Permanent link">¶</a></h3>
+<p>از هر شهری هزاران تصویر در سال‌های مختلف و با شرایط مختلف (ابری، صاف، برفی، مه‌آلود) وجود دارد. ما نمی‌توانیم همه این تصاویر را دانلود کنیم. پس نیاز داریم با <strong>فیلترها</strong> فقط تصاویر مناسب را انتخاب کنیم.</p>
+<h3 id="_22">۵.۳ سه فیلتر اصلی<a class="headerlink" href="#_22" title="Permanent link">¶</a></h3>
+<p><strong>فیلتر اول: مکان (filterBounds)</strong></p>
+<p>فقط تصاویری را نگه می‌دارد که با محدوده ما تلاقی دارند.[^1]</p>
+<p><strong>فیلتر دوم: زمان (filterDate)</strong></p>
+<p>فقط تصاویری را نگه می‌دارد که در یک بازه زمانی خاص گرفته شده‌اند.[^1]</p>
+<p><strong>فیلتر سوم: ابر (filter)</strong></p>
+<p>فقط تصاویری را نگه می‌دارد که درصد ابر کمتری دارند.[^1]</p>
+<h3 id="_23">۵.۴ کد فراخوانی و فیلتر تصاویر<a class="headerlink" href="#_23" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">s2_collection</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">'COPERNICUS/S2_SR'</span><span class="p">)</span> \
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">tehran_bound</span><span class="p">)</span> \
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">'2024-11-01'</span><span class="p">,</span> <span class="s1">'2024-11-30'</span><span class="p">)</span> \
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">'CLOUDY_PIXEL_PERCENTAGE'</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span></code></pre></div>
+<h3 id="_24">۵.۵ توضیح خط‌به‌خط<a class="headerlink" href="#_24" title="Permanent link">¶</a></h3>
+<p><strong>خط اول: <code>ee.ImageCollection('COPERNICUS/S2_SR')</code></strong></p>
+<p>مجموعه داده Sentinel-2 Surface Reflectance را از سرور گوگل فراخوانی می‌کند.[<sup>11][</sup>1]</p>
+<ul>
+<li><strong>ImageCollection:</strong> مجموعه‌ای از هزاران تصویر مستقل</li>
+<li><strong>COPERNICUS/S2_SR:</strong> شناسه منحصر به فرد این مجموعه در پایگاه داده گوگل</li>
+<li><strong>SR (Surface Reflectance):</strong> بازتاب سطحی، یعنی تصاویری که اثر اتمسفر از آن‌ها حذف شده است</li>
+</ul>
+<p><strong>علامت <code>\</code> در انتهای خط:</strong></p>
+<p>به پایتون می‌گوید «این دستور در خط بعدی ادامه دارد». فقط برای خوانایی بهتر کد است و هیچ تاثیری بر اجرا ندارد.</p>
+<p><strong>خط دوم: <code>.filterBounds(tehran_bound)</code></strong></p>
+<p>از بین میلیون‌ها تصویر در سراسر دنیا، فقط تصاویری که با مستطیل تهران تلاقی دارند را نگه می‌دارد. این کار حجم داده را از پتابایت به چند گیگابایت کاهش می‌دهد.[^1]</p>
+<p><strong>خط سوم: <code>.filterDate('2024-11-01', '2024-11-30')</code></strong></p>
+<p>فقط تصاویری که بین اول تا سی‌ام نوامبر ۲۰۲۴ گرفته شده‌اند را انتخاب می‌کند. فرمت تاریخ باید به صورت <code>'YYYY-MM-DD'</code> باشد.[^1]</p>
+<p><strong>نکته مهم:</strong> در کد اصلی ویدیو تاریخ <code>2025-11-01</code> بود که یک تاریخ آینده است و احتمالاً تصویری بازنمی‌گرداند. شما باید تاریخ گذشته وارد کنید.</p>
+<p><strong>خط چهارم: <code>.filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 10))</code></strong></p>
+<p>فقط تصاویری که کمتر از ۱۰ درصد ابر دارند را نگه می‌دارد.[^1]</p>
+<ul>
+<li><strong>lt:</strong> مخفف Less Than (کمتر از)</li>
+<li><strong>CLOUDY_PIXEL_PERCENTAGE:</strong> یک فیلد متادیتا که درصد ابر را ذخیره کرده است</li>
+</ul>
+<p>چرا این فیلتر مهم است؟ چون ابر مانند یک دیوار سفید جلوی دوربین است و داده‌های زیر آن را مخفی می‌کند.</p>
+<h3 id="_25">۵.۶ انتخاب باندهای مورد نیاز<a class="headerlink" href="#_25" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">s2_selected</span> <span class="o">=</span> <span class="n">s2_collection</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">'B4'</span><span class="p">,</span> <span class="s1">'B3'</span><span class="p">,</span> <span class="s1">'B2'</span><span class="p">,</span> <span class="s1">'B8'</span><span class="p">])</span>
+</span></code></pre></div>
+<h3 id="_26">۵.۷ مفهوم باند طیفی<a class="headerlink" href="#_26" title="Permanent link">¶</a></h3>
+<p><strong>باند (Band) چیست؟</strong></p>
+<p>دوربین ماهواره Sentinel-2 مانند دوربین عکاسی معمولی نیست. این دوربین ۱۳ سنسور مجزا دارد که همزمان ۱۳ عکس از همان صحنه می‌گیرد، هر کدام در یک <strong>طول موج</strong> مختلف.[<sup>13][</sup>11]</p>
+<p><strong>چرا این کار را می‌کند؟</strong></p>
+<p>چشم انسان فقط ۳ رنگ را می‌بیند: قرمز، سبز و آبی. اما اجسام مختلف (گیاه، آب، خاک، ساختمان) در طول‌موج‌های دیگر (مثل مادون قرمز یا فرابنفش) رفتارهای منحصر به فردی دارند که با چشم دیده نمی‌شوند.[<sup>12][</sup>11]</p>
+<h3 id="_27">۵.۸ معرفی چهار باند انتخابی<a class="headerlink" href="#_27" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">نام باند</th>
+<th style="text-align: left;">نام انگلیسی</th>
+<th style="text-align: left;">طول موج</th>
+<th style="text-align: left;">کاربرد</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">B2</td>
+<td style="text-align: left;">Blue</td>
+<td style="text-align: left;">۴۹۰ نانومتر</td>
+<td style="text-align: left;">آشکارسازی آب و جو [^11]</td>
+</tr>
+<tr>
+<td style="text-align: left;">B3</td>
+<td style="text-align: left;">Green</td>
+<td style="text-align: left;">۵۶۰ نانومتر</td>
+<td style="text-align: left;">رشد گیاهان و سلامت [^11]</td>
+</tr>
+<tr>
+<td style="text-align: left;">B4</td>
+<td style="text-align: left;">Red</td>
+<td style="text-align: left;">۶۶۵ نانومتر</td>
+<td style="text-align: left;">جذب کلروفیل [<sup>11][</sup>12]</td>
+</tr>
+<tr>
+<td style="text-align: left;">B8</td>
+<td style="text-align: left;">Near Infrared</td>
+<td style="text-align: left;">۸۴۲ نانومتر</td>
+<td style="text-align: left;">ساختار سلولی گیاه [<sup>11][</sup>13]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>چرا باند B8 (مادون قرمز) مهم است؟</strong></p>
+<p>برگ‌های سبز و سالم در باند مادون قرمز بازتاب بسیار بالایی دارند (تا ۸۰٪)، در حالی که خاک و آب تقریباً هیچ بازتابی ندارند. این ویژگی باعث می‌شود که گیاهان در تصاویر مادون قرمز بسیار روشن دیده شوند و تشخیص آن‌ها آسان باشد.[<sup>12][</sup>13]</p>
+<h3 id="composite">۵.۹ محاسبه تصویر ترکیبی (Composite)<a class="headerlink" href="#composite" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">s2_median</span> <span class="o">=</span> <span class="n">s2_selected</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">tehran_bound</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="median">۵.۱۰ توضیح تابع median<a class="headerlink" href="#median" title="Permanent link">¶</a></h3>
+<p><strong>مفهوم میانه (Median):</strong></p>
+<p>فرض کنید پس از اعمال فیلترها، ۱۰ تصویر از تهران در یک ماه باقی مانده است. حالا برای هر پیکسل (مثلاً پیکسل مربوط به میدان آزادی) ۱۰ مقدار مختلف داریم. تابع <code>median()</code> مقدار وسطی (میانه) را انتخاب می‌کند.[^1]</p>
+<p><strong>مثال عددی:</strong></p>
+<p>مقادیر یک پیکسل در ۱۰ تصویر:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>[100, 105, 102, 500, 103, 104, 101, 106, 102, 103]
+</span></code></pre></div>
+<p>مقدار ۵۰۰ واضحاً یک مقدار پرت است (شاید یک ابر کوچک بوده). اگر میانگین بگیریم:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>میانگین = (100+105+...+500+...+103) / 10 = 132.6
+</span></code></pre></div>
+<p>این مقدار توسط ۵۰۰ خراب شده است.</p>
+<p>اما میانه (مقدار وسطی پس از مرتب‌سازی):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>مرتب شده: [100, 101, 102, 102, 103, 103, 104, 105, 106, 500]
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>میانه = (103 + 103) / 2 = 103
+</span></code></pre></div>
+<p>این مقدار واقعی‌تر است.[^1]</p>
+<p><strong>نتیجه:</strong> تابع <code>median()</code> یک تصویر ترکیبی (Composite) تولید می‌کند که تقریباً بدون ابر است و نماینده کل دوره زمانی است.</p>
+<h3 id="clip">۵.۱۱ تابع clip<a class="headerlink" href="#clip" title="Permanent link">¶</a></h3>
+<p><strong>عملکرد clip:</strong></p>
+<p>تصویر را دقیقاً به اندازه مستطیل <code>tehran_bound</code> برش می‌زند. مثل کار برش دادن کاغذ با قیچی است. بدون این تابع، تصویر کل تایل ماهواره‌ای (معمولاً ۱۰۰×۱۰۰ کیلومتر) دانلود می‌شود.[^1]</p>
+<hr>
+<h2 id="_28">۶. نمایش تصویر با رنگ طبیعی<a class="headerlink" href="#_28" title="Permanent link">¶</a></h2>
+<h3 id="_29">۶.۱ مفهوم رنگ طبیعی<a class="headerlink" href="#_29" title="Permanent link">¶</a></h3>
+<p>رنگ طبیعی (True Color) به تصویری گفته می‌شود که دقیقاً مشابه آنچه چشم انسان می‌بیند باشد: آسمان آبی، درخت سبز، خاک قهوه‌ای. برای ساخت این تصویر باید سه باند قرمز، سبز و آبی را ترکیب کنیم.[<sup>11][</sup>12]</p>
+<h3 id="_30">۶.۲ کد نمایش<a class="headerlink" href="#_30" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">vis_params</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="s1">'bands'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'B4'</span><span class="p">,</span> <span class="s1">'B3'</span><span class="p">,</span> <span class="s1">'B2'</span><span class="p">],</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="s1">'min'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="s1">'max'</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">}</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># اضافه کردن لایه به نقشه</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">s2_median</span><span class="p">,</span> <span class="n">vis_params</span><span class="p">,</span> <span class="s1">'Sentinel True Color'</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="_31">۶.۳ توضیح پارامترها<a class="headerlink" href="#_31" title="Permanent link">¶</a></h3>
+<p><strong>پارامتر bands:</strong></p>
+<p>ترتیب باندها برای ترکیب رنگی را مشخص می‌کند. ترتیب استاندارد RGB در geemap به صورت <code>[Red, Green, Blue]</code> است.[<sup>13][</sup>11]</p>
+<p><strong>نکته مهم:</strong> ترتیب قرار گرفتن باندها بسیار مهم است. اگر بنویسید <code>['B2', 'B3', 'B4']</code> تصویر به رنگ‌های غیرطبیعی نمایش داده می‌شود.</p>
+<p><strong>پارامتر min و max:</strong></p>
+<p>محدوده مقادیر دیجیتالی پیکسل‌ها را برای نمایش تعیین می‌کند. تصاویر Sentinel-2 مقادیری بین ۰ تا حدود ۱۰۰۰۰ دارند. ما به پایتون می‌گوییم:[<sup>5][</sup>8]</p>
+<ul>
+<li>مقادیر ۰ تا ۳۰۰۰ را روی طیف سیاه (۰) تا سفید (۲۵۵) نگاشت کن</li>
+<li>مقادیر کمتر از ۰ → سیاه</li>
+<li>مقادیر بیشتر از ۳۰۰۰ → سفید</li>
+</ul>
+<p>اگر این اعداد را تغییر دهید:</p>
+<ul>
+<li><strong>کاهش max</strong> (مثلاً ۲۰۰۰): تصویر روشن‌تر می‌شود</li>
+<li><strong>افزایش max</strong> (مثلاً ۵۰۰۰): تصویر تیره‌تر می‌شود</li>
+</ul>
+<hr>
+<h2 id="_32">۷. محاسبه شاخص پوشش گیاهی<a class="headerlink" href="#_32" title="Permanent link">¶</a></h2>
+<h3 id="ndvi">۷.۱ معرفی شاخص NDVI<a class="headerlink" href="#ndvi" title="Permanent link">¶</a></h3>
+<p>شاخص NDVI مخفف <strong>Normalized Difference Vegetation Index</strong> است که به فارسی «شاخص نرمال‌شده تفاضل پوشش گیاهی» نامیده می‌شود. این یکی از پرکاربردترین شاخص‌ها در سنجش از دور است.[<sup>14][</sup>12][^13]</p>
+<h3 id="ndvi_1">۷.۲ فلسفه NDVI<a class="headerlink" href="#ndvi_1" title="Permanent link">¶</a></h3>
+<p><strong>سوال اصلی:</strong> چگونه بفهمیم یک نقطه پوشش گیاهی سالم دارد یا خیر؟</p>
+<p><strong>پاسخ:</strong> گیاهان سبز رفتار خاصی در طیف نوری دارند:[<sup>14][</sup>12][^13]</p>
+<ol>
+<li>در نور قرمز (۶۶۵ نانومتر) بازتاب کمی دارند - چون رنگدانه کلروفیل نور قرمز را جذب می‌کند</li>
+<li>در مادون قرمز نزدیک (۸۴۲ نانومتر) بازتاب بسیار زیادی دارند - به دلیل ساختار سلولی برگ</li>
+</ol>
+<p>این تفاوت بازتاب، یک «امضای طیفی» منحصر به فرد برای گیاهان است.</p>
+<h3 id="ndvi_2">۷.۳ فرمول NDVI<a class="headerlink" href="#ndvi_2" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+NDVI = \frac{NIR - Red}{NIR + Red} = \frac{B8 - B4}{B8 + B4}
+\]</div>
+<p><strong>چرا این فرمول؟</strong></p>
+<ul>
+<li><strong>صورت کسر</strong> (NIR - Red): تفاضل بازتاب را محاسبه می‌کند</li>
+<li><strong>مخرج کسر</strong> (NIR + Red): نرمال‌سازی می‌کند تا نتیجه همیشه بین -۱ و +۱ باشد</li>
+</ul>
+<h3 id="ndvi_3">۷.۴ تفسیر مقادیر NDVI<a class="headerlink" href="#ndvi_3" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">محدوده مقدار</th>
+<th style="text-align: left;">تفسیر</th>
+<th style="text-align: left;">رنگ نمایش</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>+0.6 تا +0.8</strong></td>
+<td style="text-align: left;">جنگل انبوه و بسیار سالم [<sup>12][</sup>14]</td>
+<td style="text-align: left;">سبز تیره</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>+0.4 تا +0.6</strong></td>
+<td style="text-align: left;">پوشش گیاهی متراکم (مزارع سبز)</td>
+<td style="text-align: left;">سبز روشن</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>+0.2 تا +0.4</strong></td>
+<td style="text-align: left;">پوشش گیاهی کم‌تراکم (مرتع)</td>
+<td style="text-align: left;">سبز کم‌رنگ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>0 تا +0.2</strong></td>
+<td style="text-align: left;">خاک لخت، بیابان [^14]</td>
+<td style="text-align: left;">سفید/کرم</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>-0.2 تا 0</strong></td>
+<td style="text-align: left;">آب، برف، ساختمان [<sup>12][</sup>14]</td>
+<td style="text-align: left;">آبی</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>کمتر از -0.2</strong></td>
+<td style="text-align: left;">ابر یا آب عمیق</td>
+<td style="text-align: left;">آبی تیره</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ndvi_4">۷.۵ کد محاسبه NDVI<a class="headerlink" href="#ndvi_4" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">ndvi</span> <span class="o">=</span> <span class="n">s2_median</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">'B8'</span><span class="p">,</span> <span class="s1">'B4'</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">'NDVI'</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="normalizeddifference">۷.۶ توضیح تابع normalizedDifference<a class="headerlink" href="#normalizeddifference" title="Permanent link">¶</a></h3>
+<p>این یک تابع آماده در Earth Engine است که فرمول <code>(A - B) / (A + B)</code> را محاسبه می‌کند:[<sup>12][</sup>1]</p>
+<ul>
+<li>باند اول (<code>B8</code>) = A (صورت و مخرج)</li>
+<li>باند دوم (<code>B4</code>) = B (صورت و مخرج)</li>
+</ul>
+<p><strong>تابع rename:</strong></p>
+<p>نام باند خروجی را به <code>'NDVI'</code> تغییر می‌دهد. این فقط برای راحتی کار است و هیچ تاثیری بر محاسبات ندارد.[^1]</p>
+<h3 id="ndvi_5">۷.۷ کد نمایش NDVI<a class="headerlink" href="#ndvi_5" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">ndvi_vis</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="s1">'min'</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="s1">'max'</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="s1">'palette'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'blue'</span><span class="p">,</span> <span class="s1">'white'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">]</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">}</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># اضافه کردن لایه به نقشه</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">ndvi</span><span class="p">,</span> <span class="n">ndvi_vis</span><span class="p">,</span> <span class="s1">'Sentinel NDVI'</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="_33">۷.۸ توضیح پالت رنگی<a class="headerlink" href="#_33" title="Permanent link">¶</a></h3>
+<p><strong>پارامتر palette:</strong></p>
+<p>یک فهرست از رنگ‌ها که به صورت گرادیانت (طیف تدریجی) نمایش داده می‌شوند:[<sup>8][</sup>4]</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">مقدار NDVI</th>
+<th style="text-align: left;">رنگ نمایش</th>
+<th style="text-align: left;">معنی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">-0.2</td>
+<td style="text-align: left;">آبی (blue)</td>
+<td style="text-align: left;">آب، ابر</td>
+</tr>
+<tr>
+<td style="text-align: left;">0 تا +0.3</td>
+<td style="text-align: left;">سفید (white)</td>
+<td style="text-align: left;">خاک، بیابان</td>
+</tr>
+<tr>
+<td style="text-align: left;">+0.8</td>
+<td style="text-align: left;">سبز (green)</td>
+<td style="text-align: left;">جنگل، گیاه سالم</td>
+</tr>
+</tbody>
+</table>
+<p><strong>مقادیر بینابین:</strong> رنگ‌های میانی به صورت خودکار محاسبه می‌شوند (مثلاً NDVI=0.4 → سبز کم‌رنگ).</p>
+<hr>
+<h2 id="_34">۸. ذخیره‌سازی تصویر نهایی<a class="headerlink" href="#_34" title="Permanent link">¶</a></h2>
+<h3 id="_35">۸.۱ چرا نیاز به دانلود داریم؟<a class="headerlink" href="#_35" title="Permanent link">¶</a></h3>
+<p>تا این لحظه تمام محاسبات روی <strong>سرورهای گوگل</strong> انجام شده است. ما فقط نتیجه را به صورت تعاملی در VSCode می‌بینیم. اگر بخواهیم:[<sup>4][</sup>5][^8]</p>
+<ul>
+<li>تصویر را در نرم‌افزار QGIS باز کنیم</li>
+<li>تحلیل‌های پیشرفته‌تری انجام دهیم</li>
+<li>تصویر را با دیگران به اشتراک بگذاریم</li>
+</ul>
+<p>باید آن را به صورت فایل روی کامپیوتر خود ذخیره کنیم.</p>
+<h3 id="export">۸.۲ کد کامل Export<a class="headerlink" href="#export" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">'~/Downloads'</span><span class="p">)</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s1">'Tehran_NDVI.tif'</span><span class="p">)</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">geemap</span><span class="o">.</span><span class="n">ee_export_image</span><span class="p">(</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="n">ndvi</span><span class="p">,</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="n">filename</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    <span class="n">scale</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>    <span class="n">region</span><span class="o">=</span><span class="n">tehran_bound</span><span class="p">,</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="n">file_per_band</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="_36">۸.۳ توضیح خط‌به‌خط<a class="headerlink" href="#_36" title="Permanent link">¶</a></h3>
+<p><strong>خط اول: <code>import os</code></strong></p>
+<p>ماژول مدیریت سیستم‌عامل را وارد می‌کند. این ماژول برای کار با مسیرها، پوشه‌ها و فایل‌ها استفاده می‌شود.</p>
+<p><strong>خط چهارم: <code>os.path.expanduser('~/Downloads')</code></strong></p>
+<p>مسیر پوشه Downloads را پیدا می‌کند. علامت <code>~</code> یک میانبر است که به معنی «پوشه خانگی کاربر» است:</p>
+<ul>
+<li>در لینوکس: <code>/home/username/Downloads</code></li>
+<li>در ویندوز: <code>C:\Users\YourName\Downloads</code></li>
+<li>در مک: <code>/Users/username/Downloads</code></li>
+</ul>
+<p><strong>خط پنجم: <code>os.path.join(out_dir, 'Tehran_NDVI.tif')</code></strong></p>
+<p>مسیر کامل فایل را می‌سازد. این تابع به جای استفاده از <code>/</code> یا <code>\</code> که در سیستم‌عامل‌های مختلف متفاوت است، به صورت خودکار جداکننده صحیح را انتخاب می‌کند.</p>
+<p><strong>خط هشتم: <code>geemap.ee_export_image(...)</code></strong></p>
+<p>فرآیند دانلود تصویر از سرور گوگل را شروع می‌کند.[<sup>5][</sup>8][^4]</p>
+<h3 id="export_1">۸.۴ پارامترهای تابع export<a class="headerlink" href="#export_1" title="Permanent link">¶</a></h3>
+<p><strong>پارامتر اول (<code>ndvi</code>):</strong></p>
+<p>شیء تصویری که می‌خواهیم دانلود کنیم. می‌توانید به جای NDVI، تصویر RGB یا هر باند دیگری را قرار دهید.</p>
+<p><strong>پارامتر filename:</strong></p>
+<p>مسیر کامل و نام فایل خروجی. پسوند <code>.tif</code> یعنی فرمت GeoTIFF که یک فرمت استاندارد برای تصاویر ماهواره‌ای است.</p>
+<p><strong>پارامتر scale:</strong></p>
+<p>رزولوشن مکانی هر پیکسل به متر. مثلاً <code>scale=30</code> یعنی هر پیکسل نماینده یک مربع ۳۰×۳۰ متری از زمین است.[^11]</p>
+<p><strong>نکته مهم:</strong> رزولوشن اصلی Sentinel-2 برای باندهای مرئی ۱۰ متر است. اما اگر <code>scale=10</code> بگذارید، حجم فایل خیلی زیاد می‌شود. برای محدوده‌های بزرگ مثل تهران، scale=30 یا scale=50 توصیه می‌شود.[^11]</p>
+<p><strong>جدول تاثیر scale بر حجم فایل:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Scale (متر)</th>
+<th style="text-align: left;">تعداد پیکسل‌ها</th>
+<th style="text-align: left;">حجم تقریبی</th>
+<th style="text-align: left;">کیفیت</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">بالا</td>
+<td style="text-align: left;">~500 مگابایت</td>
+<td style="text-align: left;">عالی</td>
+</tr>
+<tr>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">متوسط</td>
+<td style="text-align: left;">~50 مگابایت</td>
+<td style="text-align: left;">خوب</td>
+</tr>
+<tr>
+<td style="text-align: left;">50</td>
+<td style="text-align: left;">کم</td>
+<td style="text-align: left;">~20 مگابایت</td>
+<td style="text-align: left;">متوسط</td>
+</tr>
+<tr>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">خیلی کم</td>
+<td style="text-align: left;">~5 مگابایت</td>
+<td style="text-align: left;">ضعیف</td>
+</tr>
+</tbody>
+</table>
+<p><strong>پارامتر region:</strong></p>
+<p>محدوده جغرافیایی که می‌خواهیم دانلود کنیم. اگر این پارامتر را ننویسید، کل تصویر (ممکن است چند استان) دانلود می‌شود.[^1]</p>
+<p><strong>پارامتر file_per_band:</strong></p>
+<p>اگر <code>True</code> باشد، برای هر باند یک فایل جداگانه ذخیره می‌شود. اگر <code>False</code> باشد (پیش‌فرض)، همه باندها در یک فایل GeoTIFF چند باندی ذخیره می‌شوند.[<sup>4][</sup>5]</p>
+<h3 id="_37">۸.۵ خطای رایج: حجم بیش از حد<a class="headerlink" href="#_37" title="Permanent link">¶</a></h3>
+<p><strong>پیام خطا:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Error: Image too large. Please reduce scale or region.
+</span></code></pre></div>
+<p><strong>دلیل:</strong> گوگل محدودیت حجمی برای دانلود مستقیم دارد (معمولاً حدود ۲۵۶ مگابایت).[^1]</p>
+<p><strong>راه‌حل‌ها:</strong></p>
+<ol>
+<li>افزایش مقدار <code>scale</code> (مثلاً از ۱۰ به ۳۰)</li>
+<li>کوچک کردن محدوده <code>region</code></li>
+<li>استفاده از Export به Google Drive به جای دانلود مستقیم</li>
+</ol>
+<hr>
+<h2 id="_38">۹. کد کامل پروژه<a class="headerlink" href="#_38" title="Permanent link">¶</a></h2>
+<p>در اینجا کد کامل و آماده اجرا برای کپی در یک فایل پایتون آورده شده است:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ee</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">geemap</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># ee.Authenticate()</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'your-project-name'</span><span class="p">)</span>  <span class="c1"># نام پروژه خود را وارد کنید</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="n">Map</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mf">35.69</span><span class="p">,</span> <span class="mf">51.39</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="n">tehran_bound</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="mf">51.0</span><span class="p">,</span> <span class="mf">35.5</span><span class="p">,</span> <span class="mf">51.6</span><span class="p">,</span> <span class="mf">35.9</span><span class="p">])</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">tehran_bound</span><span class="p">,</span> <span class="p">{</span><span class="s1">'color'</span><span class="p">:</span> <span class="s1">'red'</span><span class="p">},</span> <span class="s1">'Tehran Bound'</span><span class="p">)</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="n">s2_collection</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">'COPERNICUS/S2_SR'</span><span class="p">)</span> \
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>    <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">tehran_bound</span><span class="p">)</span> \
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>    <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">'2024-11-01'</span><span class="p">,</span> <span class="s1">'2024-11-30'</span><span class="p">)</span> \
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">'CLOUDY_PIXEL_PERCENTAGE'</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="n">s2_selected</span> <span class="o">=</span> <span class="n">s2_collection</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">'B4'</span><span class="p">,</span> <span class="s1">'B3'</span><span class="p">,</span> <span class="s1">'B2'</span><span class="p">,</span> <span class="s1">'B8'</span><span class="p">])</span>
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="n">s2_median</span> <span class="o">=</span> <span class="n">s2_selected</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">tehran_bound</span><span class="p">)</span>
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="n">vis_params</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>    <span class="s1">'bands'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'B4'</span><span class="p">,</span> <span class="s1">'B3'</span><span class="p">,</span> <span class="s1">'B2'</span><span class="p">],</span>
+</span><span id="__span-18-24"><a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>    <span class="s1">'min'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-18-25"><a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>    <span class="s1">'max'</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+</span><span id="__span-18-26"><a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="p">}</span>
+</span><span id="__span-18-27"><a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a><span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">s2_median</span><span class="p">,</span> <span class="n">vis_params</span><span class="p">,</span> <span class="s1">'Sentinel True Color'</span><span class="p">)</span>
+</span><span id="__span-18-28"><a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>
+</span><span id="__span-18-29"><a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="n">ndvi</span> <span class="o">=</span> <span class="n">s2_median</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">'B8'</span><span class="p">,</span> <span class="s1">'B4'</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">'NDVI'</span><span class="p">)</span>
+</span><span id="__span-18-30"><a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>
+</span><span id="__span-18-31"><a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="n">ndvi_vis</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-18-32"><a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>    <span class="s1">'min'</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span>
+</span><span id="__span-18-33"><a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>    <span class="s1">'max'</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+</span><span id="__span-18-34"><a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>    <span class="s1">'palette'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'blue'</span><span class="p">,</span> <span class="s1">'white'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">]</span>
+</span><span id="__span-18-35"><a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="p">}</span>
+</span><span id="__span-18-36"><a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a><span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">ndvi</span><span class="p">,</span> <span class="n">ndvi_vis</span><span class="p">,</span> <span class="s1">'Sentinel NDVI'</span><span class="p">)</span>
+</span><span id="__span-18-37"><a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a>
+</span><span id="__span-18-38"><a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="n">Map</span>
+</span><span id="__span-18-39"><a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a>
+</span><span id="__span-18-40"><a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a><span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">'~/Downloads'</span><span class="p">)</span>
+</span><span id="__span-18-41"><a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a><span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s1">'Tehran_NDVI.tif'</span><span class="p">)</span>
+</span><span id="__span-18-42"><a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a>
+</span><span id="__span-18-43"><a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a><span class="n">geemap</span><span class="o">.</span><span class="n">ee_export_image</span><span class="p">(</span>
+</span><span id="__span-18-44"><a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a>    <span class="n">ndvi</span><span class="p">,</span>
+</span><span id="__span-18-45"><a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a>    <span class="n">filename</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span>
+</span><span id="__span-18-46"><a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a>    <span class="n">scale</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+</span><span id="__span-18-47"><a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a>    <span class="n">region</span><span class="o">=</span><span class="n">tehran_bound</span><span class="p">,</span>
+</span><span id="__span-18-48"><a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a>    <span class="n">file_per_band</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="__span-18-49"><a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a><span class="p">)</span>
+</span><span id="__span-18-50"><a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a>
+</span><span id="__span-18-51"><a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"فایل با موفقیت در </span><span class="si">{</span><span class="n">out_file</span><span class="si">}</span><span class="s2"> ذخیره شد."</span><span class="p">)</span>
+</span></code></pre></div>
+<hr>
+<h2 id="_39">۱۰. منابع داده اضافی<a class="headerlink" href="#_39" title="Permanent link">¶</a></h2>
+<p>گوگل ارث انجین علاوه بر Sentinel-2، دسترسی به صدها مجموعه داده دیگر را فراهم می‌کند. در اینجا برخی از پرکاربردترین آن‌ها معرفی می‌شوند:[<sup>9][</sup>10][^1]</p>
+<h3 id="landsat">۱۰.۱ تصاویر ماهواره Landsat<a class="headerlink" href="#landsat" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">landsat</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">'LANDSAT/LC08/C02/T1_L2'</span><span class="p">)</span> \
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">tehran_bound</span><span class="p">)</span> \
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">'2024-01-01'</span><span class="p">,</span> <span class="s1">'2024-12-31'</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>مشخصات:</strong></p>
+<ul>
+<li>رزولوشن: ۳۰ متر[^11]</li>
+<li>دوره زمانی: از سال ۱۹۸۴ تا اکنون</li>
+<li>کاربرد: مطالعات تاریخی تغییرات کاربری اراضی</li>
+</ul>
+<h3 id="sentinel-5p">۱۰.۲ داده‌های آلودگی هوا (Sentinel-5P)<a class="headerlink" href="#sentinel-5p" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">no2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">'COPERNICUS/S5P/NRTI/L3_NO2'</span><span class="p">)</span> \
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">'2024-11-01'</span><span class="p">,</span> <span class="s1">'2024-11-30'</span><span class="p">)</span> \
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'NO2_column_number_density'</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>کاربرد:</strong> نقشه‌برداری آلودگی هوای شهرهای بزرگ.</p>
+<h3 id="modis">۱۰.۳ دمای سطح زمین (MODIS)<a class="headerlink" href="#modis" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">lst</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">'MODIS/006/MOD11A1'</span><span class="p">)</span> \
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">'2024-06-01'</span><span class="p">,</span> <span class="s1">'2024-06-30'</span><span class="p">)</span> \
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'LST_Day_1km'</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>کاربرد:</strong> مطالعه جزایر حرارتی شهری.</p>
+<h3 id="viirs-nighttime-lights">۱۰.۴ نور شب (VIIRS Nighttime Lights)<a class="headerlink" href="#viirs-nighttime-lights" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">nightlights</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">'NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG'</span><span class="p">)</span> \
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">'2024-01-01'</span><span class="p">,</span> <span class="s1">'2024-12-31'</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>کاربرد:</strong> تخمین جمعیت، فعالیت اقتصادی و توسعه شهری.</p>
+<h3 id="_40">۱۰.۵ داده‌های جمعیتی<a class="headerlink" href="#_40" title="Permanent link">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">population</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">'WorldPop/GP/100m/pop/IRN_2020'</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>کاربرد:</strong> برنامه‌ریزی شهری و تحلیل دسترسی به خدمات.</p>
+<hr>
+
+
+
+
+
+
+
+
+  <aside class="md-source-file">
+    
+    
+    
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="مشارکت کنندگان">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/Fatemebookanian" class="md-author" title="@Fatemebookanian">
+          
+          <img src="https://avatars.githubusercontent.com/u/108584390?v=4&amp;size=72" alt="Fatemebookanian">
+        </a>
+      
+        <a href="https://github.com/web-flow" class="md-author" title="@web-flow">
+          
+          <img src="https://avatars.githubusercontent.com/u/19864447?v=4&amp;size=72" alt="web-flow">
+        </a>
+      
+        <a href="https://github.com/alitayebi" class="md-author" title="@alitayebi">
+          
+          <img src="https://avatars.githubusercontent.com/u/42505961?v=4&amp;size=72" alt="alitayebi">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  برگشت به بالا
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی">
+        
+          
+          <a href="../session6/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: جلسه ۶ - مصورسازی حرکت">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                قبلی
+              </span>
+              <div class="md-ellipsis">
+                جلسه ۶ - مصورسازی حرکت
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../session8/" class="md-footer__link md-footer__link--next" aria-label="بعدی: جلسه ۸ - پایش محیط زیست">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                بعدی
+              </span>
+              <div class="md-ellipsis">
+                جلسه ۸ - پایش محیط زیست
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 GIS Hacks
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/gishacks" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/gishacks" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
